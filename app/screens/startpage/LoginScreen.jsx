@@ -5,8 +5,7 @@ import BackButton from "../../components/BackButton";
 
 
 export default function LoginScreen() {
-
-    const navigation = useNavigation();
+  
     
     return (
         <View className="flex-1 bg-gray-800">
