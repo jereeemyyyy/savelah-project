@@ -18,18 +18,21 @@ export default function LoginCard() {
 
         if (error) { 
             Alert.alert(error.message);
-        }
-        Alert.alert("User signed in successfully");
-        setLoading(false);
+            setLoading(false);
+        } else {
+            Alert.alert("User signed in successfully");
+            setLoading(false);
 
-        // If login is successful, navigate to the Home Screen
-        navigation.navigate('NavigationBar');
+            // If login is successful, navigate to the Home Screen
+            navigation.navigate('NavigationBar');
+        }
     }
+        
     
     return (
         <View className="flex-1 bg-white px-8 pt-8"
                 style={{borderTopLeftRadius: 50, borderTopRightRadius: 50}}>
-            <View className="form space-y-2">
+            <View className="form space-y-3">
                 <Text className="text-gray-700 ml-4">Email Address</Text>
                 <TextInput className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
                     value={email}
