@@ -33,7 +33,8 @@ export default function RegistrationCard() {
             options: {
                 data: {
                     first_name: firstname,
-                    last_name: lastname
+                    last_name: lastname,
+                    username: ''
                 }
             }
         });
