@@ -12,7 +12,10 @@ export default function NavigationBar() {
     const Tab = createBottomTabNavigator();
 
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }}> 
+        <Tab.Navigator screenOptions={{ headerShown: false,
+                                        tabBarActiveTintColor: 'purple',
+                                        tabBarInactiveTintColor: 'gray', 
+        }}> 
             <Tab.Screen name="Home" 
                         component={HomeScreen}
                         options={{
