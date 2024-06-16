@@ -5,10 +5,10 @@ import { PieChart } from 'react-native-chart-kit';
 const screenWidth = Dimensions.get('window').width;
 
 const data = [
-  { name: 'Food', amount: 200, color: '#A020F0', legendFontColor: '#000000', legendFontSize: 12 },
-  { name: 'Transportation', amount: 150, color: '#36A2EB', legendFontColor: '#000000', legendFontSize: 12 },
-  { name: 'Billings', amount: 100, color: '#FFC0CB', legendFontColor: '#000000', legendFontSize: 12 },
-  { name: 'Others', amount: 50, color: '#FFFF00', legendFontColor: '#000000', legendFontSize: 12 },
+  { name: 'Food', amount: 200, color: '#A020F0', legendFontColor: '#000000', legendFontSize: 10 },
+  { name: 'Transportation', amount: 150, color: '#36A2EB', legendFontColor: '#000000', legendFontSize: 10 },
+  { name: 'Billings', amount: 100, color: '#FFC0CB', legendFontColor: '#000000', legendFontSize: 10 },
+  { name: 'Others', amount: 50, color: '#FFFF00', legendFontColor: '#000000', legendFontSize: 10 },
 ];
 
 const lastWeekTotal = data.reduce((sum, item) => sum + item.amount, 0);
@@ -17,8 +17,7 @@ const thisWeekTotal = data.reduce((sum, item) => sum + item.amount, 0); // Repla
 export default function ExpensesSummary() {
   return (
     <SafeAreaView className="flex-1 justify-start items-center">
-    <View className="bg-white rounded-lg p-5 shadow-lg w-11/12">
-        <Text className="text-xl mb-4">Expenses This Week</Text>
+    <View className="bg-white rounded-lg p-5 shadow-lg w-12/12">
         <PieChart
         data={data.map(item => ({
             name: item.name,
@@ -28,7 +27,7 @@ export default function ExpensesSummary() {
             legendFontSize: item.legendFontSize
         }))}
         width={screenWidth - 100}
-        height={220}
+        height={150}
         chartConfig={{
             backgroundColor: '#ffffff',
             backgroundGradientFrom: '#ffffff',
@@ -37,10 +36,11 @@ export default function ExpensesSummary() {
         }}
         accessor="population"
         backgroundColor="transparent"
-        paddingLeft="15"
+        paddingLeft="10"
+        paddingRight="0"
         absolute
         />
-        <View className="mt-5">
+        <View className="mt-1">
         <Text className="text-lg text-black">Last Week: ${lastWeekTotal}</Text>
         <Text className="text-lg text-black">This Week: ${thisWeekTotal}</Text>
         </View>
