@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 import  BackButton  from '../../components/BackButton';
-import  ExpensesSummary from './components/ExpensesSummary';
+import  ExpensesSummary from '../../components/ExpensesSummary';
 import ToDoList from './components/ToDoList';
 
 export default function HomeScreen() {
