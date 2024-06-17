@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Modal, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, Dimensions, Alert} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Slider from '@react-native-community/slider';
 import { Entypo } from '@expo/vector-icons';
@@ -7,9 +7,27 @@ import { Entypo } from '@expo/vector-icons';
 const { height } = Dimensions.get('window');
 
 const BudgetModal = ({ visible, onClose, budgetGoal, totalBudget, onBudgetChange, onSave }) => {
+  
+  // Settings for the modal dimensions
   const modalHeight = height / 2;
   const topSectionHeight = 2 * modalHeight / 6;
   const bottomSectionHeight = modalHeight - topSectionHeight;
+
+  // Creates the alert box
+  const createTwoButtonAlert = () =>
+    Alert.alert('Confirmation', `Are you sure you want to add $${budgetGoal} into this category?` , [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => console.log('OK Pressed')},
+    ]);
+
+    const handleSave = () => {
+      // Handle Query logic here to save the budget to supabase
+
+    }
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
@@ -63,12 +81,12 @@ const BudgetModal = ({ visible, onClose, budgetGoal, totalBudget, onBudgetChange
                      : 'Its ok! This amount is just within your budget!'}
                 </Text>
             </View> 
-            <TouchableOpacity className="bg-white rounded-full py-3 mt-4" onPress={onSave}>
+            <TouchableOpacity className="bg-white rounded-full py-3 mt-4" onPress={createTwoButtonAlert}>
               <Text className="text-center text-purple-500 font-bold">Save</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </View> 
     </Modal>
   );
 };
