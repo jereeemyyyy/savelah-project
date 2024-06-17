@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, ScrollView, SafeAreaView} from 'react-native';
 import { styled } from 'nativewind';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const mockTasksFromDatabase = [
   { id: 1, title: 'Task 1', description: 'Description of Task 1', amount: 100, time: '10:00 AM' },
@@ -20,6 +21,14 @@ export default function ToDoList() {
       setTasks(mockTasksFromDatabase);
     }, 1000); // Simulating delay for fetching data
   }, []);
+
+  const fetchTasks = () => {
+    // Simulate fetching tasks from an external database
+    // Replace with actual API call or database query
+    setTimeout(() => {
+      setTasks(mockTasksFromDatabase);
+    }, 1000); // Simulating delay for fetching data
+  };
 
   const handleAddToConfirmation = (task) => {
     // Logic to add task to another list for confirmation
@@ -49,13 +58,22 @@ export default function ToDoList() {
 
   return (
     <SafeAreaView className="flex-1 justify-start">
-        <View className="flex-1 bg-grey-100">
+      <View className="flex-row justify-between items-center p-4 bg-gray-800 shadow">
+        <Text className="text-xl font-bold text-white">To-Do List</Text>
+        <TouchableOpacity
+          onPress={fetchTasks}
+          className="bg-purple-500 p-2 rounded"
+        >
+          <Icon name="refresh" size={24} color="white"/>
+        </TouchableOpacity>
+      </View>
+      <View className="flex-1 bg-gray-800">
         <FlatList
             data={tasks}
             renderItem={renderItem}
             keyExtractor={(item) => item.id.toString()}
         />
-        </View>
+      </View>
     </SafeAreaView>
   );
 };
