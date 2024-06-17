@@ -47,7 +47,7 @@ export default function ExpensesCategoryButton() {
   );
 
   return (
-    <View className="flex-1 p-4 bg-white">
+    <View className="flex-1 p-4 bg-gray-800">
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -60,13 +60,13 @@ export default function ExpensesCategoryButton() {
           onChangeText={setNewAmount}
           placeholder="Amount"
           keyboardType="numeric"
-          className="border p-2 mb-2 rounded"
+          className="border p-2 mb-2 rounded bg-white"
         />
         <TextInput
           value={newCategory}
           onChangeText={setNewCategory}
           placeholder="Category"
-          className="border p-2 mb-2 rounded"
+          className="border p-2 mb-2 rounded bg-white"
         />
         <Button title="Add" onPress={handleAddItem} color="purple" />
       </View>
