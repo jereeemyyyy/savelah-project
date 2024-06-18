@@ -8,21 +8,30 @@ export default function BudgetsScreen() {
   const [totalBudget] = useState(1000);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [pressed, setPressed] = useState(null);
 
+
+  // Should fetch data from categories table in supabase
   const categories = [
-    { id: 1, name: 'Food', icon: 'restaurant', color: 'violet' },
-    { id: 2, name: 'Transportation', icon: 'car', color: 'gray' },
-    { id: 3, name: 'Housing', icon: 'home', color: 'gray' },
+    { id: 1, name: 'Food', icon: 'restaurant'},
+    { id: 2, name: 'Transportation', icon: 'car'},
+    { id: 3, name: 'Housing', icon: 'home'},
   ];
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setShowModal(true);
+    setPressed(category.id);
   };
 
   const handleBudgetChange = (value) => {
     setBudgetGoal(value);
   };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setPressed(null);
+  }
 
   return (
     <View className="flex-1 bg-gray-800 p-6">
@@ -42,7 +51,8 @@ export default function BudgetsScreen() {
             onPress={() => handleCategorySelect(category)}
           >
             <View
-              className={`bg-${category.color}-500 h-20 rounded-lg p-4 mr-4 flex-row items-center`}
+              className={`bg-${pressed === category.id ? 'violet' : 'gray'}-500 
+                          h-20 rounded-lg p-4 mr-4 flex-row items-center`}
             >
               <Ionicons
                 name={category.icon}
@@ -66,7 +76,7 @@ export default function BudgetsScreen() {
       
       <BudgetModal
       visible={showModal}
-      onClose={() => setShowModal(false)}
+      onClose={handleCloseModal}
       budgetGoal={budgetGoal}
       totalBudget={totalBudget}
       onBudgetChange={handleBudgetChange}
