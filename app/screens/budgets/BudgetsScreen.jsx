@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome6 } from '@expo/vector-icons';
 import BudgetModal from './components/BudgetModal';
 
 export default function BudgetsScreen() {
@@ -31,6 +32,13 @@ export default function BudgetsScreen() {
   const handleCloseModal = () => {
     setShowModal(false);
     setPressed(null);
+  }
+
+  // Add a new category function
+
+  const handleAddCategory = () => {
+    
+
   }
 
   return (
@@ -64,13 +72,20 @@ export default function BudgetsScreen() {
                 <Text className="text-white font-bold">{category.name}</Text>
                 {selectedCategory?.id === category.id && (
                   <Text className="text-white font-bold">
-                    ${budgetGoal}
+                    {pressed ? budgetGoal : ''}
                   </Text>
                 )}
               </View>
             </View>
           </TouchableOpacity>
         ))}
+
+        <TouchableOpacity>
+          <View className="bg-gray-500 h-20 rounded-lg p-4 items-center flex-row">
+            <FontAwesome6 name="add" size={28} color="white" />
+            <Text className="text-white font-bold ml-2 ">Add Category</Text>
+          </View>
+        </TouchableOpacity>
       </ScrollView>
       
       
