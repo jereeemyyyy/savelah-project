@@ -5,10 +5,10 @@ import { PieChart } from 'react-native-chart-kit';
 const screenWidth = Dimensions.get('window').width;
 
 const data = [ // placeholder data
-  { name: 'Food', amount: 200, color: '#A020F0', legendFontColor: '#000000', legendFontSize: 12 },
-  { name: 'Transportation', amount: 150, color: '#36A2EB', legendFontColor: '#000000', legendFontSize: 12 },
-  { name: 'Billings', amount: 100, color: '#FFC0CB', legendFontColor: '#000000', legendFontSize: 12 },
-  { name: 'Others', amount: 50, color: '#FFFF00', legendFontColor: '#000000', legendFontSize: 12 },
+  { name: 'Food', amount: 200, color: '#FF0000', legendFontColor: '#000000', legendFontSize: 12 },            // Red
+  { name: 'Transportation', amount: 150, color: '#0000FF', legendFontColor: '#000000', legendFontSize: 12 },  // Blue
+  { name: 'Housing', amount: 100, color: '#00FF00', legendFontColor: '#000000', legendFontSize: 12 },         // Green
+  { name: 'Others', amount: 50, color: '#FFFF00', legendFontColor: '#000000', legendFontSize: 12 },           // Yellow
 ];
 
 const lastWeekTotal = data.reduce((sum, item) => sum + item.amount, 0);

@@ -11,6 +11,7 @@ export default function ExpensesScreen() {
             <View className="flex-1">
                 <ExpensesSummary/>
             </View>  
+            <Text className="font-bold text-xl p-5 text-white">Categories</Text>  
             <View className="flex-1">
                 <ExpensesCategoryButton/>
             </View>  
