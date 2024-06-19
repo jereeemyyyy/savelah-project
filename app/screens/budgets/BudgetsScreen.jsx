@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
@@ -22,6 +22,26 @@ export default function BudgetsScreen() {
   //   { id: 2, name: 'Transportation', icon: 'car'},
   //   { id: 3, name: 'Housing', icon: 'home'},
   // ];
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const { data, error } = await supabase
+          .from('categories')
+          .select('*');
+
+        if (error) {
+          throw new Error('Error fetching categories');
+        }
+
+        setCategories(data || []);
+      } catch (error) {
+        console.error('Error fetching categories:', error.message);
+      }
+    }
+
+    fetchCategories();
+  }, []);
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
