@@ -18,6 +18,8 @@ module.exports = {
     './app/screens/leaderboards/LeaderBoardsScreen.{js,jsx,ts,tsx}',
     './app/screens/profile/ProfileScreen.{js,jsx,ts,tsx}',
     './app/screens/budgets/components/BudgetModal.{js,jsx,ts,tsx}',
+    './app/screens/budgets/components/AddCategoryModal.{js,jsx,ts,tsx}',
+    './app/screens/budgets/components/ChooseIconPopup.{js,jsx,ts,tsx}',
     './app/screens/home/components/ToDoList.{js,jsx,ts,tsx}',
   ],
   theme: {
