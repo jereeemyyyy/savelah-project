@@ -31,13 +31,17 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
   };
 
   return (
-    <Modal visible={visible} animationType="slide" transparent>
+    <Modal visible={visible} animationType="fade" transparent>
       <View className="flex-1 bg-black/50">
         <View className="flex-1 justify-center items-center">
-          <View className="bg-gray-800 p-6 rounded-lg justify-center">
-            <TouchableOpacity onPress={onClose} className="mr-1 mb-5">
-              <MaterialIcons name="cancel" size={24} color="white"/> 
-            </TouchableOpacity>
+          <View className="bg-gray-800 p-6 rounded-lg justify-center p-3">
+            <View className="flex-row justify-between items-center mb-5">  
+                <TouchableOpacity onPress={onClose} className="mr-2">
+                    <MaterialIcons name="cancel" size={24} color="red"/> 
+                </TouchableOpacity>
+                <Text className="text-white font-bold text-2xl mr-9">Add Category</Text>
+            </View>
+            
             <TextInput
               placeholder="Category Name"
               placeholderTextColor="gray"
@@ -70,7 +74,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
                 onPress={handleAddCategory}
                 className="bg-blue-500 p-2 rounded bg-violet-500 w-40 justify-center items-center"
                 >
-                <Text className="text-white font-bold">Add Category</Text>
+                <Text className="text-white font-bold">Add</Text>
                 </TouchableOpacity>
             </View>
           </View>
