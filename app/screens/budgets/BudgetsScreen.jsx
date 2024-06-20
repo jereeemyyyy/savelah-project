@@ -58,6 +58,43 @@ export default function BudgetsScreen() {
     setPressed(null);
   }
 
+  // Save the new budget goal (Update)
+  const handleSaveNewBudget = async () => {
+
+    try {
+      const { data, error } = await supabase
+      .from('categories')
+      .update({ amount: budgetGoal })
+      .eq('id', selectedCategory.id);
+
+    } catch(error) {
+      console.error('Error updating category:', error.message);
+    }
+
+    setShowModal(false);
+
+  };
+
+  // Deletes a category
+  const handleDeleteCategory = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('categories')
+        .delete()
+        .eq('id', selectedCategory.id);
+
+      if (error) {
+        console.error('Error deleting category:', error.message);
+      } else {
+        setCategories(categories.filter((category) => category.id !== selectedCategory.id));
+        setShowModal(false);
+      }
+    } catch (error) {
+      console.error('Error deleting category:', error.message);
+    }
+  };
+  
+
   // Add a new category function
   const handleAddCategory = async (newCategory) => {
     try {
@@ -139,10 +176,8 @@ export default function BudgetsScreen() {
       budgetGoal={budgetGoal}
       totalBudget={totalBudget}
       onBudgetChange={handleBudgetChange}
-      onSave={() => {
-        console.log('Budget saved:', budgetGoal);
-        setShowModal(false);
-      }}
+      onSave={handleSaveNewBudget}
+      onDelete={handleDeleteCategory}
       />
 
       <AddCategoryModal

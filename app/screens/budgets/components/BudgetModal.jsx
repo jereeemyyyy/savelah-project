@@ -6,7 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 
 const { height } = Dimensions.get('window');
 
-const BudgetModal = ({ visible, onClose, budgetGoal, totalBudget, onBudgetChange, onSave }) => {
+const BudgetModal = ({ visible, onClose, budgetGoal, totalBudget, onBudgetChange, onSave, onDelete }) => {
   
   // Settings for the modal dimensions
   const modalHeight = height / 2;
@@ -21,13 +21,19 @@ const BudgetModal = ({ visible, onClose, budgetGoal, totalBudget, onBudgetChange
         onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
+      {text: 'OK', onPress: onSave},
     ]);
 
-    const handleSave = () => {
-      // Handle Query logic here to save the budget to supabase
-
-    }
+  // Creates the alert box for deleting the category
+  const createDeleteAlert = () =>
+    Alert.alert('Delete Category', 'Are you sure you want to delete this category?', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      { text: 'Delete', onPress: onDelete },
+    ]);
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
@@ -48,7 +54,7 @@ const BudgetModal = ({ visible, onClose, budgetGoal, totalBudget, onBudgetChange
                 <TouchableOpacity className="mr-3">
                   <Ionicons name="calculator" size={34} color="black" />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={createDeleteAlert}>
                     <Entypo name="circle-with-cross" size={34} color="black" />
                 </TouchableOpacity>
               </View>
