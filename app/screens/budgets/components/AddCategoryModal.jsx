@@ -47,6 +47,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
               placeholderTextColor="gray"
               value={categoryName}
               onChangeText={setCategoryName}
+              style={{ color: 'white' }}
               className="border border-gray-400 p-2 mb-2 w-60"
             />
             <TextInput
@@ -54,6 +55,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
               placeholderTextColor="gray"
               value={categoryAmount}
               onChangeText={setCategoryAmount}
+              style={{ color: 'white' }}
               keyboardType="numeric"
               className="border border-gray-400 p-2 mb-2"
             />
@@ -65,7 +67,10 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
                 {categoryIcon ? (
                     <Ionicons name={categoryIcon} size={24} color="white" />
                 ) : (
-                    <Text className="text-white">Choose Icon</Text>
+                    <View className="bg-indigo-500 rounded p-2">
+                        <Text className="text-white font-bold">Choose Icon</Text>
+                    </View>
+                    
                 )}
                 </TouchableOpacity>
             </View>
