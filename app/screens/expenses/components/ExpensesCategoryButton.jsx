@@ -115,7 +115,7 @@ export default function ExpensesCategoryButton() {
           </StyledView>
         </StyledModal>
       )}
-
+      
       <StyledModal
         animationType="slide"
         transparent={true}
