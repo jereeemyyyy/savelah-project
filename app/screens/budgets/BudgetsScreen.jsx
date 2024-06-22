@@ -15,14 +15,6 @@ export default function BudgetsScreen() {
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   const [categories, setCategories] = useState([]);
 
-
-  // Should fetch data from categories table in supabase
-  // const categories = [
-  //   { id: 1, name: 'Food', icon: 'restaurant'},
-  //   { id: 2, name: 'Transportation', icon: 'car'},
-  //   { id: 3, name: 'Housing', icon: 'home'},
-  // ];
-
   useEffect(() => {
     async function fetchCategories() {
       try {
@@ -47,6 +39,7 @@ export default function BudgetsScreen() {
     setSelectedCategory(category);
     setShowModal(true);
     setPressed(category.id);
+    setBudgetGoal(category.amount);
   };
 
   const handleBudgetChange = (value) => {
@@ -60,19 +53,24 @@ export default function BudgetsScreen() {
 
   // Save the new budget goal (Update)
   const handleSaveNewBudget = async () => {
-
     try {
       const { data, error } = await supabase
-      .from('categories')
-      .update({ amount: budgetGoal })
-      .eq('id', selectedCategory.id);
+        .from('categories')
+        .update({ amount: budgetGoal })
+        .eq('id', selectedCategory.id);
 
-    } catch(error) {
+      if (error) {
+        throw new Error('Error updating category');
+      }
+
+      setCategories(categories.map(category =>
+        category.id === selectedCategory.id ? { ...category, amount: budgetGoal } : category
+      ));
+    } catch (error) {
       console.error('Error updating category:', error.message);
     }
 
     setShowModal(false);
-
   };
 
   // Deletes a category
@@ -97,6 +95,7 @@ export default function BudgetsScreen() {
 
   // Add a new category function
   const handleAddCategory = async (newCategory) => {
+
     try {
       const { data: user, error: userError } = await supabase.auth.getUser();
   
@@ -153,7 +152,7 @@ export default function BudgetsScreen() {
                 <Text className="text-white font-bold">{category.category}</Text>
                 {selectedCategory?.id === category.id && (
                   <Text className="text-white font-bold">
-                    {pressed ? budgetGoal : ''}
+                    {pressed ? category.amount : ''}
                   </Text>
                 )}
               </View>
