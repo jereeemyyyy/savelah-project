@@ -1,7 +1,6 @@
 // ToDoList.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, FlatList, ScrollView, SafeAreaView} from 'react-native';
-import { styled } from 'nativewind';
+import { View, Text, TouchableOpacity, FlatList, ScrollView, SafeAreaView} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const mockTasksFromDatabase = [
@@ -59,7 +58,7 @@ export default function ToDoList() {
   return (
     <SafeAreaView className="flex-1 justify-start">
       <View className="flex-row justify-between items-center p-4 bg-gray-800 shadow">
-        <Text className="text-xl font-bold text-white">To-Do List</Text>
+        <Text className="text-3xl font-bold text-white">To-Do List</Text>
         <TouchableOpacity
           onPress={fetchTasks}
           className="bg-purple-500 p-2 rounded"
