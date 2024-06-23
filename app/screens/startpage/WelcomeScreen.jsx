@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, Text, TouchableOpacity, View, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 
@@ -8,15 +8,19 @@ export default function WelcomeScreen() {
 
     return (
         <SafeAreaView className="bg-gray-800 flex-1" >
-            <View className="flex-1 flex justify-around my-4">
-                <View>
-                    <Text className="text-white fond-bold text-center">
-                        "Insert Some Image Here"
+            <View className="flex-1 flex justify-around">
+                <View className="items-center -mt-19">
+                    <Image source={require('../../assets/images/savingmoney.png')} 
+                           style={{width: 350, height: 200}}/>
+                </View>
+
+                <View className="-mt-20">
+                    <Text className="font-bold text-white text-4xl px-5">
+                            Easiest way to manage your finances!
                     </Text>
                 </View>
-                <Text className="font-bold text-white text-4xl px-5 ">
-                    Easiest way to manage your finances!
-                </Text>
+                        
+
                 <View>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('SignUp')}
