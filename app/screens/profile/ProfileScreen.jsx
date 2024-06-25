@@ -36,7 +36,11 @@ export default function ProfileScreen() {
                 Alert.alert(error.message);
             } else {
                 Alert.alert("User logged out successfully");
-                navigation.navigate('Login'); // Navigate to the login screen after logout
+                // Reset the navigation stack when logging out
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'Welcome' }],
+                });
             }
         } catch (error) {
             Alert.alert(error.message);
