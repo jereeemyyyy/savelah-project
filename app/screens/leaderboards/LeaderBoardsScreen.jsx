@@ -6,12 +6,12 @@ import { format } from 'date-fns';
 
   const formatDate = (date) => format(date, 'yyyy-MM-dd');
 
-  const updateLoginStreak = async (userId) => {
+  export const updateLoginStreak = async (userId) => {
     try {
       const { data, error } = await supabase
         .from('user_logins')
         .select('last_login_date, login_streak')
-        .eq('user_id', userId)
+        .eq('id', userId)
         .single();
   
       if (error && error.code !== 'PGRST116') {
@@ -32,13 +32,13 @@ import { format } from 'date-fns';
           await supabase
             .from('user_logins')
             .update({ last_login_date: todayStr, login_streak: login_streak + 1 })
-            .eq('user_id', userId);
+            .eq('id', userId);
         } else if (differenceInDays > 1) {
           // Last login was two or more days ago, reset streak
           await supabase
             .from('user_logins')
             .update({ last_login_date: todayStr, login_streak: 1 })
-            .eq('user_id', userId);
+            .eq('id', userId);
         }
         // If differenceInDays === 0, do nothing (already logged in today)
       } else {

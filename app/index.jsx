@@ -4,25 +4,11 @@ import WelcomeScreen from './screens/startpage/WelcomeScreen';
 import LoginScreen from './screens/startpage/LoginScreen';
 import SignUpScreen from './screens/startpage/SignUpScreen'
 import NavigationBar from './components/NavigationBar';
-import { supabase } from '../lib/supabase';
-import { useEffect } from 'react';
-import { updateLoginStreak } from './screens/leaderboards/LeaderBoardsScreen';
 
 export default function App() {
 
   const stack = createNativeStackNavigator();
-  
-  // Update login streak when user logs in
-  useEffect(() => {
-    const checkLoginStreak = async () => {
-      const { data: { user }, error } = await supabase.auth.getUser();
-      if (user) {
-        await updateLoginStreak(user.id);
-      }
-    };
 
-    checkLoginStreak();
-  }, []);
 
   return ( 
       <stack.Navigator initialRouteName='Welcome'>
