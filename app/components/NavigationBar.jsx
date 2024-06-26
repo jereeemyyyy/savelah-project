@@ -5,11 +5,31 @@ import BudgetsScreen from '../screens/budgets/BudgetsScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import LeaderBoardsScreen from '../screens/leaderboards/LeaderBoardsScreen';
 import { Ionicons } from '@expo/vector-icons';
+import { supabase } from '../../lib/supabase';
+import { useEffect } from 'react';
+import { updateLoginStreak }   from '../screens/leaderboards/LeaderBoardsScreen';
 
 
 export default function NavigationBar() {
 
     const Tab = createBottomTabNavigator();
+
+    // Update login streak when user logs in
+    useEffect(() => {
+        const checkLoginStreak = async () => {
+        try {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (error) throw error;
+            if (user) {
+            await updateLoginStreak(user.id);
+            }
+        } catch (error) {
+            console.error('Error updating login streak:', error);
+        }
+        };
+
+        checkLoginStreak();
+    }, []);
 
     return (
         <Tab.Navigator screenOptions={{ headerShown: false,
