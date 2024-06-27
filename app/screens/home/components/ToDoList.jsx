@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AddExpenseButton from './AddExpenseButton';
 
@@ -9,6 +9,8 @@ const mockTasksFromDatabase = [
   { id: 3, title: 'Task 3', description: 'Description of Task 3', amount: 200, time: '3:45 PM' },
   // Add more tasks as needed
 ];
+
+const defaultCategories = ['Food', 'Transport', 'Housing'];
 
 export default function ToDoList() {
   const [tasks, setTasks] = useState([]);
@@ -37,128 +39,49 @@ export default function ToDoList() {
   };
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <View style={styles.taskInfo}>
-        <Text style={styles.taskTitle}>{item.title}</Text>
-        <Text>{item.description}</Text>
-        <Text style={styles.taskTime}>{item.time}</Text>
+    <View className="bg-white p-4 rounded-lg shadow-md mb-4 mx-4">
+      <View className="flex-row items-center justify-between">
+        <View className="flex-3">
+          <Text className="text-lg font-bold">{item.title}</Text>
+          <Text>{item.description}</Text>
+          <Text className="text-sm text-gray-500">{item.time}</Text>
+        </View>
+        <View className="flex-1 items-center">
+          <Text className={`font-bold text-lg ${item.amount >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+            ${item.amount}
+          </Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => handleAddToConfirmation(item)}
+          className="bg-purple-500 p-3 rounded"
+        >
+          <Text className="text-white font-bold">Add</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.amountContainer}>
-        <Text style={[styles.amount, item.amount >= 0 ? styles.positiveAmount : styles.negativeAmount]}>
-          ${item.amount}
-        </Text>
-      </View>
-      <TouchableOpacity
-        onPress={() => handleAddToConfirmation(item)}
-        style={styles.addButton}
-      >
-        <Text style={styles.addButtonText}>Add</Text>
-      </TouchableOpacity>
     </View>
   );
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>To-Do List</Text>
-        <View style={styles.headerButtons}>
+    <SafeAreaView className="flex-1">
+      <View className="flex-row bg-gray-900 p-4 justify-between">
+        <Text className="text-2xl font-bold text-white mb-4">To-Do List</Text>
+        <View className="flex-row items-center">
+
           <AddExpenseButton addTask={addTask} />
           <TouchableOpacity
             onPress={fetchTasks}
-            style={styles.refreshButton}
+            className="bg-purple-500 p-3 rounded ml-4"
           >
-            <Icon name="refresh" size={24} color="white" />
+            <Icon name="refresh" size={22} color="white" />
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.listContainer}>
-        <FlatList
-          data={tasks}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </View>
+      <FlatList
+        data={tasks}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerClassName="p-4"
+      />
     </SafeAreaView>
   );
-};
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    justifyContent: 'start',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: 'gray',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  headerButtons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  refreshButton: {
-    backgroundColor: 'purple',
-    padding: 8,
-    borderRadius: 5,
-    marginLeft: 8,
-  },
-  listContainer: {
-    flex: 1,
-    backgroundColor: 'gray',
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 12,
-    backgroundColor: 'white',
-    margin: 8,
-    borderRadius: 8,
-  },
-  taskInfo: {
-    flex: 3,
-  },
-  taskTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  taskTime: {
-    fontSize: 12,
-    color: 'gray',
-  },
-  amountContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  amount: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  positiveAmount: {
-    color: 'green',
-  },
-  negativeAmount: {
-    color: 'red',
-  },
-  addButton: {
-    backgroundColor: 'purple',
-    padding: 8,
-    borderRadius: 5,
-  },
-  addButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-});
-
+}
