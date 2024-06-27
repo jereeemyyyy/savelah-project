@@ -16,24 +16,26 @@ export default function BudgetsScreen() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const { data, error } = await supabase
-          .from('categories')
-          .select('*');
-
-        if (error) {
-          throw new Error('Error fetching categories');
-        }
-
-        setCategories(data || []);
-      } catch (error) {
-        console.error('Error fetching categories:', error.message);
-      }
-    }
-
-    fetchCategories();
+    fetchUserCategories();
   }, []);
+
+  const fetchUserCategories = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data, error } = await supabase.rpc('get_user_categories', { p_user_id: user.id });
+        if (error) throw error;
+        setCategories(data || []);
+        
+      } else {
+        console.log("No user found");
+      }
+    } catch (error) {
+      console.error('Error fetching categories:', error.message);
+      
+    }
+    
+  };
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
@@ -137,6 +139,7 @@ export default function BudgetsScreen() {
           <TouchableOpacity
             key={category.id}
             onPress={() => handleCategorySelect(category)}
+            className="h-20 mr-1"
           >
             <View
               className={`bg-${pressed === category.id ? 'violet' : 'gray'}-500 

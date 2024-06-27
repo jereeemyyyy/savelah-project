@@ -72,7 +72,7 @@ const ChooseIconPopup = ({ visible, onIconSelect, onClose }) => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() => handleIconPress(item)}
-                  className={`p-4 bg-${selectedIcon === item ? 'gray-400' : 'transparent'} rounded-lg ml-1 my-1`}
+                  className={`p-4 bg-${selectedIcon === item ? 'gray-200' : 'transparent'} rounded-lg ml-1 my-1`}
                 >
                   <Ionicons name={item} size={24} color="black" />
                 </TouchableOpacity>
