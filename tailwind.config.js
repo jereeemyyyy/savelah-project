@@ -21,7 +21,7 @@ module.exports = {
     './app/screens/budgets/components/AddCategoryModal.{js,jsx,ts,tsx}',
     './app/screens/budgets/components/ChooseIconPopup.{js,jsx,ts,tsx}',
     './app/screens/home/components/ToDoList.{js,jsx,ts,tsx}',
-    './app/screens/home/components/AddExpenseButton.{js,jsx,ts,tsx}',
+    './app/screens/home/components/AddTaskButton.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {},

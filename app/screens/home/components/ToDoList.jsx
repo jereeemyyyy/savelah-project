@@ -1,40 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AddExpenseButton from './AddExpenseButton';
+import AddTaskButton from './AddTaskButton';
+import { supabase } from '../../../../lib/supabase';
 
-const mockTasksFromDatabase = [
-  { id: 1, title: 'Task 1', description: 'Description of Task 1', amount: 100, time: '10:00 AM' },
-  { id: 2, title: 'Task 2', description: 'Description of 2', amount: -50, time: '12:30 PM' },
-  { id: 3, title: 'Task 3', description: 'Description of Task 3', amount: 200, time: '3:45 PM' },
-  // Add more tasks as needed
-];
 
 const defaultCategories = ['Food', 'Transport', 'Housing'];
 
 export default function ToDoList() {
   const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchTasks = async () => {
+    setLoading(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data, error } = await supabase
+          .from('to_do_list')
+          .select('*')
+          .eq('user_id', user.id);
+
+        if (error) {
+          console.error('Error fetching tasks:', error);
+        } else {
+          const formattedTasks = data.map((task) => ({
+            id: task.id,
+            title: task.title,
+            description: task.description,
+            amount: task.amount_spent,
+            time: new Date(task.time).toLocaleTimeString(),
+          }));
+          setTasks(formattedTasks);
+        }
+      }
+    } catch (error) {
+      console.error('Unexpected error fetching tasks:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // Simulate fetching tasks from an external database
-    setTimeout(() => {
-      setTasks(mockTasksFromDatabase);
-    }, 1000); // Simulating delay for fetching data
+    fetchTasks();
   }, []);
-
-  const fetchTasks = () => {
-    // Simulate fetching tasks from an external database
-    setTimeout(() => {
-      setTasks(mockTasksFromDatabase);
-    }, 1000); // Simulating delay for fetching data
-  };
 
   const addTask = (task) => {
     setTasks([...tasks, task]);
   };
 
   const handleAddToConfirmation = (task) => {
-    // Logic to add task to another list for confirmation
     console.log(`Added task "${task.title}" to confirmation list.`);
   };
 
@@ -66,8 +81,7 @@ export default function ToDoList() {
       <View className="flex-row bg-gray-900 p-4 justify-between">
         <Text className="text-2xl font-bold text-white mb-4">To-Do List</Text>
         <View className="flex-row items-center">
-
-          <AddExpenseButton addTask={addTask} />
+          <AddTaskButton addTask={addTask} />
           <TouchableOpacity
             onPress={fetchTasks}
             className="bg-purple-500 p-3 rounded ml-4"
@@ -76,12 +90,18 @@ export default function ToDoList() {
           </TouchableOpacity>
         </View>
       </View>
-      <FlatList
-        data={tasks}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerClassName="p-4"
-      />
+      {loading ? (
+        <View className="flex-1 justify-center items-center">
+          <Text>Loading...</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={tasks}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerClassName="p-4"
+        />
+      )}
     </SafeAreaView>
   );
 }
