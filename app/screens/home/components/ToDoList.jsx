@@ -3,13 +3,15 @@ import { View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-nati
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AddTaskButton from './AddTaskButton';
 import { supabase } from '../../../../lib/supabase';
-
+import ConfirmationModal from './ConfirmationModal'; // Import the modal component
 
 const defaultCategories = ['Food', 'Transport', 'Housing'];
 
 export default function ToDoList() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const fetchTasks = async () => {
     setLoading(true);
@@ -20,7 +22,6 @@ export default function ToDoList() {
           .from('to_do_list')
           .select('*')
           .eq('user_id', user.id);
-
         if (error) {
           console.error('Error fetching tasks:', error);
         } else {
@@ -29,7 +30,7 @@ export default function ToDoList() {
             title: task.title,
             description: task.description,
             amount: task.amount_spent,
-            time: new Date(task.time).toLocaleTimeString(),
+            time: task.time // new Date(task.time).toLocaleTimeString(),
           }));
           setTasks(formattedTasks);
         }
@@ -50,7 +51,8 @@ export default function ToDoList() {
   };
 
   const handleAddToConfirmation = (task) => {
-    console.log(`Added task "${task.title}" to confirmation list.`);
+    setSelectedTask(task);
+    setModalVisible(true);
   };
 
   const renderItem = ({ item }) => (
@@ -100,6 +102,13 @@ export default function ToDoList() {
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
           contentContainerClassName="p-4"
+        />
+      )}
+      {selectedTask && (
+        <ConfirmationModal
+          task={selectedTask}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
         />
       )}
     </SafeAreaView>
