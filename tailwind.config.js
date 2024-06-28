@@ -14,6 +14,7 @@ module.exports = {
     './app/screens/home/HomeScreen.{js,jsx,ts,tsx}',
     './app/screens/expenses/ExpensesScreen.{js,jsx,ts,tsx}',
     './app/screens/expenses/components/ExpensesCategoryButton.{js,jsx,ts,tsx}',
+    './app/screens/expenses/components/ExpensesModal.{js,jsx,ts,tsx}',
     './app/screens/budgets/BudgetsScreen.{js,jsx,ts,tsx}',
     './app/screens/leaderboards/LeaderBoardsScreen.{js,jsx,ts,tsx}',
     './app/screens/profile/ProfileScreen.{js,jsx,ts,tsx}',

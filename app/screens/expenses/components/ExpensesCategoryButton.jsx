@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, TextInput, Button, Modal } from 'react-native';
 import { supabase } from '../../../../lib/supabase';
+import ExpenseModal from './ExpensesModal';
 
 
 // Initial categories with predefined colors
@@ -27,9 +28,7 @@ export default function ExpensesCategoryButton({userId}) {
   const [categories, setCategories] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [addModalVisible, setAddModalVisible] = useState(false);
-  const [newAmount, setNewAmount] = useState('');
-  const [newCategory, setNewCategory] = useState('');
+  
 
   useEffect(() => {
 
@@ -77,20 +76,25 @@ export default function ExpensesCategoryButton({userId}) {
       />
       
       {selectedItem && (
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(!modalVisible)}
-        >
-          <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-            <View className="m-4 bg-white rounded-lg p-6">
-              <Text className="text-xl font-bold mb-2">{selectedItem.category}</Text>
-              <Text className="text-gray-600 mb-4">Amount Spent: ${selectedItem.total_expense}</Text>
-              <Button title="Close" onPress={() => setModalVisible(!modalVisible)} color="purple" />
-            </View>
-          </View>
-        </Modal>
+        <ExpenseModal 
+          selectedItem={selectedItem} 
+          visible={modalVisible} 
+          onClose={() => setModalVisible(!modalVisible)}
+        />
+        // <Modal
+        //   animationType="fade"
+        //   transparent={true}
+        //   visible={modalVisible}
+        //   onRequestClose={() => setModalVisible(!modalVisible)}
+        // >
+        //   <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+        //     <View className="m-4 bg-white rounded-lg p-6">
+        //       <Text className="text-xl font-bold mb-2">{selectedItem.category}</Text>
+        //       <Text className="text-gray-600 mb-4">Amount Spent: ${selectedItem.total_expense}</Text>
+        //       <Button title="Close" onPress={() => setModalVisible(!modalVisible)} color="purple" />
+        //     </View>
+        //   </View>
+        // </Modal>
       )}
     </View>
   );
