@@ -6,7 +6,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 export default function ExpensesModal({selectedItem, visible, onClose}) {
 
     const [expenses, setExpenses] = useState([]);
-
+    const [budgetAmount, setBudgetAmount] = useState(0);
+   
     useEffect(() => {
         const fetchExpenses = async () => {
           if (selectedItem && selectedItem.category) {
@@ -21,6 +22,8 @@ export default function ExpensesModal({selectedItem, visible, onClose}) {
               }
     
               setExpenses(data || []);
+              setBudgetAmount(data[0].category_budget);
+              
             } catch (error) {
               console.error('Error fetching expenses:', error.message);
             }
@@ -34,6 +37,8 @@ export default function ExpensesModal({selectedItem, visible, onClose}) {
         }
       }, [visible, selectedItem, selectedItem.user_id]);
     
+
+
 
     const renderItem = ({ item }) => (
         <View className="p-4 border-b border-gray-200 bg-violet-700 rounded-xl mb-2">
@@ -55,12 +60,14 @@ export default function ExpensesModal({selectedItem, visible, onClose}) {
             <View className="m-4 bg-white rounded-xl p-6 w-9/12 h-3/4">
                 
             <View className="flex-row justify-between items-center mb-0.5">
-                <Text className="text-2xl font-bold">{selectedItem.category}</Text>
-                <TouchableOpacity onPress={onClose}>
-                <MaterialIcons name="cancel" size={24} color="black" />
+                <Text className="text-3xl font-bold">{selectedItem.category}</Text>
+                <TouchableOpacity onPress={onClose} className="-mt-4">
+                  <MaterialIcons name="cancel" size={24} color="black" />
                 </TouchableOpacity>
             </View>
-            <Text className="text-gray-600 text-m mb-2">Amount Spent: ${selectedItem.total_expense}</Text>
+            <Text className={`text-gray-700 font-bold text-lg mb-2 ${ selectedItem.total_expense <= budgetAmount? 'text-gray-500' : 'text-red-500'}`}>Amount Spent: ${selectedItem.total_expense} /  ${budgetAmount} </Text>
+
+            
 
                 
             {expenses.length > 0 ? (

@@ -77,13 +77,21 @@ export default function ExpensesCategoryButton({userId}) {
             <Icon name="refresh" size={22} color="white" />
           </TouchableOpacity>
       </View>
+
+      {categories.length <= 0 ? (
+        <View className="flex-1 justify-center items-center">
+          <Text className="text-white text-lg">No Categories available.</Text>
+          <Text className="text-white text-lg mb-8">Create one in the Budgets screen!</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={categories}
+          renderItem={({ item }) => renderItem({ item })}
+          keyExtractor={(item) => item.category.toString()}
+          numColumns={2}
+          />
+      )}
       
-      <FlatList
-        data={categories}
-        renderItem={({ item }) => renderItem({ item })}
-        keyExtractor={(item) => item.category.toString()}
-        numColumns={2}
-      />
       
       {selectedItem && (
         <ExpensesModal 
