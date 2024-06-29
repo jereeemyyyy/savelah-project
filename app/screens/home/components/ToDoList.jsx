@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AddTaskButton from './AddTaskButton';
 import { supabase } from '../../../../lib/supabase';
 import ConfirmationModal from './ConfirmationModal'; // Import the modal component
+import * as eva from '@eva-design/eva';
+import { ApplicationProvider } from '@ui-kitten/components';
 
 const defaultCategories = ['Food', 'Transport', 'Housing'];
 
@@ -61,7 +63,7 @@ export default function ToDoList() {
         <View className="flex-3">
           <Text className="text-lg font-bold">{item.title}</Text>
           <Text>{item.description}</Text>
-          <Text className="text-sm text-gray-500">{item.time}</Text>
+          <Text className="text-sm text-gray-500">{new Date(item.time).toLocaleString()}</Text>
         </View>
         <View className="flex-1 items-center">
           <Text className={`font-bold text-lg ${item.amount >= 0 ? 'text-green-500' : 'text-red-500'}`}>
@@ -80,7 +82,7 @@ export default function ToDoList() {
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-row bg-gray-900 p-4 justify-between">
+      <View className="flex-row bg-gray-800 p-4 justify-between">
         <Text className="text-2xl font-bold text-white mb-4">To-Do List</Text>
         <View className="flex-row items-center">
           <AddTaskButton addTask={addTask} />
@@ -105,11 +107,13 @@ export default function ToDoList() {
         />
       )}
       {selectedTask && (
-        <ConfirmationModal
-          task={selectedTask}
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <ConfirmationModal
+            task={selectedTask}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          />
+        </ApplicationProvider>
       )}
     </SafeAreaView>
   );
