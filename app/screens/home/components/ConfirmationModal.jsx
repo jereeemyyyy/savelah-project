@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, View, Text, TouchableOpacity } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { supabase } from '../../../../lib/supabase'; 
+import { Select, SelectItem, IndexPath } from '@ui-kitten/components';
+import { supabase } from '../../../../lib/supabase';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const ConfirmationModal = ({ task, modalVisible, setModalVisible }) => {
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -39,6 +40,7 @@ const ConfirmationModal = ({ task, modalVisible, setModalVisible }) => {
     };
 
     const handleConfirm = async () => {
+        const selectedCategory = categories[selectedIndex.row];
         const { data: categoryData, error: categoryError } = await supabase.rpc('get_category_id', {
             user_id: user.id,
             category: selectedCategory
@@ -66,6 +68,8 @@ const ConfirmationModal = ({ task, modalVisible, setModalVisible }) => {
         }
     };
 
+    const handleCloseModal = () => setModalVisible(false);
+
     return (
         <Modal
             animationType="slide"
@@ -73,18 +77,26 @@ const ConfirmationModal = ({ task, modalVisible, setModalVisible }) => {
             visible={modalVisible}
             onRequestClose={() => setModalVisible(!modalVisible)}
         >
-            <View className="flex-1 justify-center items-center mt-6">
-                <View className="m-5 bg-white rounded-2xl p-9 items-center shadow-lg">
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                <View className="m-5 bg-white rounded-2xl p-9 items-center shadow-lg relative">
+                    <TouchableOpacity
+                        onPress={handleCloseModal}
+                        style={{ position: 'absolute', top: 15, right: 15 }}
+                    >
+                        <MaterialIcons name="cancel" size={24} color="black" />
+                    </TouchableOpacity>
                     <Text className="mb-4 text-center text-lg">Select Category</Text>
-                    <Picker
-                        selectedValue={selectedCategory}
-                        onValueChange={(itemValue) => setSelectedCategory(itemValue)}
+                    <Select
+                        selectedIndex={selectedIndex}
+                        onSelect={(index) => setSelectedIndex(index)}
+                        value={categories[selectedIndex.row]}
                         style={{ height: 50, width: 150 }}
+                        className="bg-gray-200 rounded-md"
                     >
                         {categories.map((category, index) => (
-                            <Picker.Item key={index} label={category} value={category} />
+                            <SelectItem key={index} title={category} />
                         ))}
-                    </Picker>
+                    </Select>
                     <TouchableOpacity
                         onPress={handleConfirm}
                         className="bg-purple-500 p-3 rounded mt-4"
