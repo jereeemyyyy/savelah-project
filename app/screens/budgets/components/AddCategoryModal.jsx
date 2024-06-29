@@ -34,12 +34,12 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
     <Modal visible={visible} animationType="fade" transparent>
       <View className="flex-1 bg-black/50">
         <View className="flex-1 justify-center items-center">
-          <View className="bg-gray-800 p-6 rounded-lg justify-center p-3">
-            <View className="flex-row justify-between items-center mb-5">  
+          <View className="bg-white p-6 rounded-lg justify-center p-3">
+            <View className="flex-row justify-between items-center mb-3">  
+                <Text className="text-black font-bold text-2xl ml-9">Add Category</Text>
                 <TouchableOpacity onPress={onClose} className="mr-2">
-                    <MaterialIcons name="cancel" size={24} color="red"/> 
+                    <MaterialIcons name="cancel" size={24} color="black"/> 
                 </TouchableOpacity>
-                <Text className="text-white font-bold text-2xl mr-9">Add Category</Text>
             </View>
             
             <TextInput
@@ -48,7 +48,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
               value={categoryName}
               onChangeText={setCategoryName}
               style={{ color: 'white' }}
-              className="border border-gray-400 p-2 mb-2 w-60"
+              className="border border-gray-400 p-2 mb-3 w-60"
             />
             <TextInput
               placeholder="Category Amount"
@@ -57,7 +57,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
               onChangeText={setCategoryAmount}
               style={{ color: 'white' }}
               keyboardType="numeric"
-              className="border border-gray-400 p-2 mb-2"
+              className="border border-gray-400 p-2 mb-3"
             />
             <View className="items-center"> 
                 <TouchableOpacity
@@ -77,7 +77,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
             <View className="items-center">
                 <TouchableOpacity
                 onPress={handleAddCategory}
-                className="bg-blue-500 p-2 rounded bg-violet-500 w-40 justify-center items-center"
+                className="bg-blue-500 py-2 px-9 rounded bg-violet-500 justify-center items-center"
                 >
                 <Text className="text-white font-bold">Add</Text>
                 </TouchableOpacity>
