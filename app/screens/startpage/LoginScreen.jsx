@@ -13,7 +13,7 @@ export default function LoginScreen() {
                 <BackButton/>
                 <View className="flex-row justify-center align-items-center pl-7 pt-14 pb-14">
                     <Image source={require('../../assets/images/logo.png')} 
-                           style={{width: 340, height: 80}}/>
+                           style={{width: 340, height: 55}}/>
                 </View>     
             </SafeAreaView>
             <LoginCard/>

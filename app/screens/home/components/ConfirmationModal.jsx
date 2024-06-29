@@ -85,20 +85,20 @@ const ConfirmationModal = ({ task, modalVisible, setModalVisible, fetchTasks }) 
 
     return (
         <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => setModalVisible(!modalVisible)}
         >
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-                <View className="m-5 bg-white rounded-2xl p-9 items-center shadow-lg relative">
+            <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                <View className="bg-white rounded-2xl p-10 items-center shadow-lg relative">
                     <TouchableOpacity
                         onPress={handleCloseModal}
                         style={{ position: 'absolute', top: 15, right: 15 }}
                     >
                         <MaterialIcons name="cancel" size={24} color="black" />
                     </TouchableOpacity>
-                    <Text className="mb-4 text-center text-lg">Select Category</Text>
+                    <Text className="mb-4 text-center text-2xl font-bold">Select Category</Text>
                     <Select
                         selectedIndex={selectedIndex}
                         onSelect={(index) => setSelectedIndex(index)}

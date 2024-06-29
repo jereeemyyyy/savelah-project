@@ -11,7 +11,7 @@ export default function SignUpScreen() {
                 <View className="flex-row justify-start">
                     <BackButton/>
                 </View>
-                <View className="flex-row  pl-7 pt-12">
+                <View className="flex-row  pl-7 pt-8">
                     <Text className="text-white font-bold text-5xl text-left">Registration</Text>   
                 </View>     
                 <View className="flex-row  pl-7 pb-10">

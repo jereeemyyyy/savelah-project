@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../../../../lib/supabase';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function ExpenseModal({selectedItem, visible, onClose}) {
+export default function ExpensesModal({selectedItem, visible, onClose}) {
 
     const [expenses, setExpenses] = useState([]);
 

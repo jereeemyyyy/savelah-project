@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Modal, Alert } from 'react-native';
 import { supabase } from '../../../../lib/supabase';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function AddTaskButton({ addTask, fetchTasks }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -53,46 +54,56 @@ export default function AddTaskButton({ addTask, fetchTasks }) {
       </TouchableOpacity>
 
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}
       >
-        <View className="m-5 bg-white rounded-2xl p-9 items-center shadow-lg">
-          <Text className="mb-4 text-center text-lg font-bold text-black">Create New Expense</Text>
-          <TextInput
-            placeholder="Title"
-            className="w-4/5 h-10 border border-gray-300 rounded px-3 mb-3"
-            value={title}
-            onChangeText={setTitle}
-          />
-          <TextInput
-            placeholder="Description"
-            className="w-4/5 h-10 border border-gray-300 rounded px-3 mb-3"
-            value={description}
-            onChangeText={setDescription}
-          />
-          <TextInput
-            placeholder="Amount"
-            className="w-4/5 h-10 border border-gray-300 rounded px-3 mb-3"
-            value={amount}
-            onChangeText={setAmount}
-            keyboardType="numeric"
-          />
-          <TouchableOpacity
-            className="bg-purple-500 p-2 rounded mb-2"
-            onPress={handleAddTask}
-          >
-            <Text className="text-white text-base">Create</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="bg-purple-500 p-2 rounded"
-            onPress={() => setModalVisible(false)}
-          >
-            <Text className="text-white text-base">Cancel</Text>
-          </TouchableOpacity>
+
+        <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+          <View className="bg-white rounded-2xl p-4 py-8 items-center shadow-lg">
+              <Text className="-mt-3 text-2xl font-bold text-black">Create New Expense</Text>
+              <TouchableOpacity
+                            onPress={() => setModalVisible(false)}
+                            style={{ position: 'absolute', top: 15, right: 15 }}
+                            className=""
+                          
+                        >
+                  <MaterialIcons name="cancel" size={24} color="black" />
+              </TouchableOpacity>
+
+
+            <View className="form space-y-2 w-80 items-center">
+              <TextInput
+                placeholder="Title"
+                className="w-4/5 h-10 border border-gray-300 rounded px-3 mb-3 mt-4"
+                value={title}
+                onChangeText={setTitle}
+              />
+              <TextInput
+                placeholder="Description"
+                className="w-4/5 h-10 border border-gray-300 rounded px-3 mb-3"
+                value={description}
+                onChangeText={setDescription}
+              />
+              <TextInput
+                placeholder="Amount"
+                className="w-4/5 h-10 border border-gray-300 rounded px-3 mb-3"
+                value={amount}
+                onChangeText={setAmount}
+                keyboardType="numeric"
+              />
+              <TouchableOpacity
+                className="bg-purple-500 p-2 rounded my-2 w-40 items-center"
+                onPress={handleAddTask}
+              >
+                <Text className="text-white text-base">Create</Text>
+              </TouchableOpacity>
+            </View>
+            
+          </View>
         </View>
       </Modal>
     </View>

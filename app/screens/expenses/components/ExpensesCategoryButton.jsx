@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, TextInput, Button, Modal } from 'react-native';
 import { supabase } from '../../../../lib/supabase';
-import ExpenseModal from './ExpensesModal';
+import ExpensesModal from './ExpensesModal';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -86,7 +86,7 @@ export default function ExpensesCategoryButton({userId}) {
       />
       
       {selectedItem && (
-        <ExpenseModal 
+        <ExpensesModal 
           selectedItem={selectedItem} 
           visible={modalVisible} 
           onClose={() => setModalVisible(!modalVisible)}
