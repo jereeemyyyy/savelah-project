@@ -96,9 +96,9 @@ export default function ToDoList() {
           </TouchableOpacity>
         
       </View>
-      {loading ? (
+      {tasks.length <= 0 ? (
         <View className="flex-1 justify-center items-center">
-          <Text>Loading...</Text>
+          <Text className="text-white text-lg mb-10">No tasks available. Add a new expense!</Text>
         </View>
       ) : (
         <FlatList
