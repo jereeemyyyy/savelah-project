@@ -4,7 +4,7 @@ import { Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { supabase } from '../../../../lib/supabase';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const ConfirmationModal = ({ task, modalVisible, setModalVisible }) => {
+const ConfirmationModal = ({ task, modalVisible, setModalVisible, fetchTasks }) => {
     const [categories, setCategories] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0));
     const [user, setUser] = useState(null);
@@ -64,8 +64,21 @@ const ConfirmationModal = ({ task, modalVisible, setModalVisible }) => {
             console.error('Error inserting expense:', insertError);
         } else {
             console.log(`Added task "${task.title}" to confirmation list.`);
+        }
+
+        const { error: deleteError } = await supabase
+            .from('to_do_list')
+            .delete()
+            .eq('id', task.id);
+
+        if (deleteError) {
+            console.error('Error deleting task:', deleteError);
+        } else {
+            console.log(`Deleted task with ID ${task.id} from to_do_list.`);
             setModalVisible(false);
         }
+        setTimeout(() => {}, 2000); // 2000 milliseconds = 2 seconds
+        fetchTasks();
     };
 
     const handleCloseModal = () => setModalVisible(false);

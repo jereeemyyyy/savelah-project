@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Modal, Alert } from 'react-native';
 import { supabase } from '../../../../lib/supabase';
 
-export default function AddTaskButton({ addTask }) {
+export default function AddTaskButton({ addTask, fetchTasks }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [tasks, setTasks] = useState([]);
 
   const handleAddTask = async () => {
     if (title && description && amount) {
@@ -35,6 +36,10 @@ export default function AddTaskButton({ addTask }) {
         setDescription('');
         setAmount('');
       }
+      setTimeout(() => {
+        setTasks();
+      }, 1000);
+      fetchTasks();
     }
   };
 
