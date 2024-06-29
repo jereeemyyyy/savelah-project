@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { supabase } from '../../../../lib/supabase';
 import { useNavigation } from "@react-navigation/native";
@@ -54,36 +54,36 @@ export default function RegistrationCard() {
     }
 
     return(
-        <View className="flex-1 bg-white px-8 pt-8"
+        <ScrollView className="h-100 flex-1 bg-white px-8 pt-8"
                 style={{borderTopLeftRadius: 50, borderTopRightRadius: 50}}>
             <View className="form space-y-2">
                 <Text className="text-gray-700 ml-4">First Name</Text>
-                <TextInput className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+                <TextInput className="p-3 bg-gray-100 text-gray-700 rounded-2xl mb-3"
                     value={firstname}
                     onChangeText={setFirstname}
                     placeholder="Enter First Name"
                 />
                 <Text className="text-gray-700 ml-4">Last Name</Text>
-                <TextInput className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+                <TextInput className="p-3 bg-gray-100 text-gray-700 rounded-2xl mb-3"
                     value={lastname}
                     onChangeText={setLastname}
                     placeholder="Enter Last Name"
                 />
                 <Text className="text-gray-700 ml-4">Email Address</Text>
-                <TextInput className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-3"
+                <TextInput className="p-3 bg-gray-100 text-gray-700 rounded-2xl mb-3"
                     value={email}
                     onChangeText={setEmail}
                     placeholder="Enter Email"
                 />
                 <Text className="text-gray-700 ml-4">Password</Text>
-                <TextInput className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-5"
+                <TextInput className="p-3 bg-gray-100 text-gray-700 rounded-2xl mb-3"
                     secureTextEntry={true}
                     value={password}
                     onChangeText={setPassword}
                     placeholder="Enter Password"
                 />
                 <Text className="text-gray-700 ml-4">Repeat Password</Text>
-                <TextInput className="p-4 bg-gray-100 text-gray-700 rounded-2xl mb-5"
+                <TextInput className="p-3 bg-gray-100 text-gray-700 rounded-2xl mb-3"
                     secureTextEntry={true}
                     value={repeatPassword}
                     onChangeText={setRepeatPassword} 
@@ -99,6 +99,6 @@ export default function RegistrationCard() {
                     </Text>
                 </TouchableOpacity>                    
             </View>
-        </View>
+        </ScrollView>
     );
 }
