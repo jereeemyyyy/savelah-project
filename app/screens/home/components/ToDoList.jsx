@@ -32,7 +32,7 @@ export default function ToDoList() {
             title: task.title,
             description: task.description,
             amount: task.amount_spent,
-            time: task.time // new Date(task.time).toLocaleTimeString(),
+            time: task.time 
           }));
           setTasks(formattedTasks);
         }
@@ -82,17 +82,19 @@ export default function ToDoList() {
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-row bg-gray-800 p-4 justify-between">
-        <Text className="text-2xl font-bold text-white mb-4">To-Do List</Text>
-        <View className="flex-row items-center">
-          <AddTaskButton addTask={addTask} />
+      <View className="flex-row bg-gray-800 p-4 justify-between items-center">
+        <Text className="text-3xl font-bold text-white mb-1">To-Do List</Text>
+          <AddTaskButton 
+            addTask={addTask} 
+            fetchTasks={fetchTasks}
+          />
           <TouchableOpacity
             onPress={fetchTasks}
-            className="bg-purple-500 p-3 rounded ml-4"
+            className="bg-purple-500 p-3 rounded -ml-8"
           >
             <Icon name="refresh" size={22} color="white" />
           </TouchableOpacity>
-        </View>
+        
       </View>
       {loading ? (
         <View className="flex-1 justify-center items-center">
@@ -112,6 +114,7 @@ export default function ToDoList() {
             task={selectedTask}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
+            fetchTasks={fetchTasks}
           />
         </ApplicationProvider>
       )}
