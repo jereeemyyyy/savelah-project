@@ -8,7 +8,7 @@ import { supabase } from '../../../lib/supabase';
 
 export default function BudgetsScreen() {
   const [budgetGoal, setBudgetGoal] = useState(400);
-  const [totalBudget] = useState(1000);
+  const [totalBudget, setTotalBudget] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [pressed, setPressed] = useState(null);
@@ -26,16 +26,22 @@ export default function BudgetsScreen() {
         const { data, error } = await supabase.rpc('get_user_categories', { p_user_id: user.id });
         if (error) throw error;
         setCategories(data || []);
+        updateTotalBudget(data);
         
       } else {
         console.log("No user found");
       }
     } catch (error) {
       console.error('Error fetching categories:', error.message);
-      
     }
     
   };
+
+  const updateTotalBudget = (categories) => {
+    const total = categories.reduce((sum, category) => sum + category.amount, 0);
+    setTotalBudget(total);
+  };
+
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
@@ -121,6 +127,7 @@ export default function BudgetsScreen() {
     } catch (error) {
       console.log('Error adding category:', error);
     }
+    fetchUserCategories();
   };
 
   return (
@@ -129,7 +136,6 @@ export default function BudgetsScreen() {
         Set up a monthly budget goal
       </Text>
       <Text className="text-white mb-4">Total budget is ${totalBudget}</Text>
-
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
