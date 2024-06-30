@@ -30,7 +30,7 @@ export default function Profile() {
                   <View className="w-20 h-20 bg-gray-200 rounded-full mr-4" />
               )}
             </TouchableOpacity>
-            <Text className="text-2xl font-bold text-white">Ryan Tan</Text>
+            <Text className="text-2xl font-bold text-white">Jeremy Tan</Text>
           </View>
     );
 }

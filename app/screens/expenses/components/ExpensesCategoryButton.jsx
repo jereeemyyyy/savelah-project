@@ -33,6 +33,23 @@ export default function ExpensesCategoryButton({userId}) {
 
   useEffect(() => {
     fetchCategoriesAndExpenses();
+
+    const subscription = supabase
+      .channel('room1')
+      .on('postgres_changes', 
+        { event: '*', 
+          schema: 'public', 
+          table: 'categories', 
+          filter: `user_id=eq.${userId}` 
+        }, payload => {
+          console.log('Change received!', payload);
+          fetchCategoriesAndExpenses(); 
+        })
+        .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscription);
+    };
   }, [userId]);
 
   const fetchCategoriesAndExpenses = async () => {

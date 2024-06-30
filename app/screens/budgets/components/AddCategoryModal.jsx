@@ -47,7 +47,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
               placeholderTextColor="gray"
               value={categoryName}
               onChangeText={setCategoryName}
-              style={{ color: 'white' }}
+              style={{ color: 'black' }}
               className="border border-gray-400 p-2 mb-3 w-60"
             />
             <TextInput
@@ -55,7 +55,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
               placeholderTextColor="gray"
               value={categoryAmount}
               onChangeText={setCategoryAmount}
-              style={{ color: 'white' }}
+              style={{ color: 'black' }}
               keyboardType="numeric"
               className="border border-gray-400 p-2 mb-3"
             />
@@ -65,7 +65,7 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
                 className="flex-row items-center mb-2"
                 >
                 {categoryIcon ? (
-                    <Ionicons name={categoryIcon} size={24} color="white" />
+                    <Ionicons name={categoryIcon} size={24} color="black" />
                 ) : (
                     <View className="bg-indigo-500 rounded p-2">
                         <Text className="text-white font-bold">Choose Icon</Text>
