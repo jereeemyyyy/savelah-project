@@ -63,9 +63,28 @@ export default function ExpensesModal({selectedItem, visible, onClose}) {
                 <MaterialIcons name="cancel" size={24} color="black" />
                 </TouchableOpacity>
             </View>
-            <Text className="text-gray-600 text-m mb-2">Amount Spent: ${selectedItem.total_expense}</Text>
+            <Text className={`text-gray-700 
+                              font-bold
+                              text-lg 
+                              -mb-1 ${ selectedItem.total_expense <= budgetAmount
+                                                                  ? 'text-gray-500' 
+                                                                  : 'text-red-500'}`}>
+                  Amount Spent: ${selectedItem.total_expense}
+            </Text>
 
-                
+            <Text className={`text-gray-700 
+                              font-bold 
+                              text-lg 
+                              mb-2 ${ selectedItem.total_expense <= budgetAmount
+                                                                  ? 'text-gray-500' 
+                                                                  : 'text-red-500'}`}>
+                  Budget: ${budgetAmount}
+            </Text>
+
+            {selectedItem.total_expense > budgetAmount && (
+              <Text className="text-red-500 mb-2 -mt-2">You have exceeded your budget!</Text>
+            )}
+
             {expenses.length > 0 ? (
                 <FlatList
                 data={expenses}
