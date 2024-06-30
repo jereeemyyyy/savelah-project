@@ -7,14 +7,14 @@ export default function Settings() {
             <TouchableOpacity className="justify-between flex-row items-center mb-4 mx-2">
                <View className="flex-row items-center">
                     <AntDesign name="user" size={24} color="black" />
-                    <Text className="text-black mx-5">Ryan Tan</Text>
+                    <Text className="text-black mx-5">Jeremy</Text>
                </View>
                <Entypo name="chevron-small-right" size={24} color="black" />
             </TouchableOpacity>
             <TouchableOpacity className="justify-between flex-row items-center mb-4 mx-2">
                 <View className="flex-row items-center">
                     <Entypo name="email" size={24} color="black" />
-                    <Text className="text-black mx-5">ryantan@gmail.com</Text>
+                    <Text className="text-black mx-5">Jeremytan@gmail.com</Text>
                 </View>
                 <Entypo name="chevron-small-right" size={24} color="black" />
             </TouchableOpacity>
