@@ -16,8 +16,35 @@ export default function BudgetsScreen() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchUserCategories();
+    fetchUserCategories(); 
+    categoriesListener();
   }, []);
+
+  const categoriesListener = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const subscription = supabase
+        .channel('room1')
+        .on('postgres_changes', 
+          { event: '*', 
+            schema: 'public', 
+            table: 'categories', 
+            filter: `user_id=eq.${user.id}` 
+          }, payload => {
+            console.log('Change received!', payload);
+            fetchUserCategories(); 
+          })
+          .subscribe();
+          
+        return () => {
+          fetchUserCategories();
+        };
+      }
+    } catch (error) {
+        console.error('Error fetching categories:', error.message);
+    }
+   };   
 
   const fetchUserCategories = async () => {
     try {
