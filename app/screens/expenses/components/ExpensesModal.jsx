@@ -22,7 +22,10 @@ export default function ExpensesModal({selectedItem, visible, onClose}) {
               }
     
               setExpenses(data || []);
-              setBudgetAmount(data[0].category_budget);
+
+              if (data.length > 0) {
+                setBudgetAmount(data[0].category_budget);
+              }
               
             } catch (error) {
               console.error('Error fetching expenses:', error.message);
