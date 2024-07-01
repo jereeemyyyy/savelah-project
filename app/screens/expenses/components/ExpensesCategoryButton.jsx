@@ -42,7 +42,6 @@ export default function ExpensesCategoryButton({userId}) {
           table: 'categories', 
           filter: `user_id=eq.${userId}` 
         }, payload => {
-          console.log('Change received!', payload);
           fetchCategoriesAndExpenses(); 
         })
         .subscribe();
