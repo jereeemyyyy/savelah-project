@@ -4,25 +4,8 @@ import { View, Text, TouchableOpacity, FlatList, TextInput, Button, Modal } from
 import { supabase } from '../../../../lib/supabase';
 import ExpensesModal from './ExpensesModal';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import getColour from '../../../utils/getColour';
 
-
-// Initial categories with predefined colors
-const initialCategories = {
-  Food: '#FF0000',            // Red
-  Transportation: '#0000FF',  // Blue
-  Housing: '#00FF00',         // Green
-  Others: '#FFFF00',          // Yellow
-};
-
-// Function to generate a random color
-const getRandomColor = () => {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
 
 export default function ExpensesCategoryButton({userId}) {
 
@@ -30,7 +13,6 @@ export default function ExpensesCategoryButton({userId}) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   
-
   useEffect(() => {
     fetchCategoriesAndExpenses();
 
@@ -66,7 +48,6 @@ export default function ExpensesCategoryButton({userId}) {
     }
   };
 
-
   const handlePressItem = (item) => {
     setSelectedItem(item);
     setModalVisible(true);
@@ -77,7 +58,7 @@ export default function ExpensesCategoryButton({userId}) {
       <View className="bg-gray-200 p-4 rounded-lg">
         <Text className="text-xl font-bold">${item.total_expense}</Text>
         <Text className="text-gray-600">{item.category}</Text>
-        <View style={{ height: 4, marginTop: 8, backgroundColor: getRandomColor() }} />
+        <View style={{ height: 4, marginTop: 8, backgroundColor: getColour(item.category) }} />
       </View>
     </TouchableOpacity>
   );
@@ -107,7 +88,6 @@ export default function ExpensesCategoryButton({userId}) {
           numColumns={2}
           />
       )}
-      
       
       {selectedItem && (
         <ExpensesModal 
