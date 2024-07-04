@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { FontAwesome6 } from '@expo/vector-icons';
+import { View, Text, Alert } from 'react-native';
+import { supabase } from '../../../lib/supabase';
 import BudgetModal from './components/BudgetModal';
 import AddCategoryModal from './components/AddCategoryModal';
-import { supabase } from '../../../lib/supabase';
+import TotalBudget from './components/TotalBudget';
+import CategoryList from './components/CategoryList';
+import AddCategoryButton from './components/AddCategoryButton';
+
 
 export default function BudgetsScreen() {
   const [budgetGoal, setBudgetGoal] = useState(400);
@@ -108,25 +110,68 @@ export default function BudgetsScreen() {
     setShowModal(false);
   };
 
+
   // Deletes a category
   const handleDeleteCategory = async () => {
     try {
-      const { data, error } = await supabase
-        .from('categories')
-        .delete()
-        .eq('id', selectedCategory.id);
-
-      if (error) {
-        console.error('Error deleting category:', error.message);
+      const { data: expenses, error: fetchExpensesError } = await supabase
+        .from('expenses')
+        .select('*')
+        .eq('category_id', selectedCategory.id);
+  
+      if (fetchExpensesError) {
+        console.error('Error fetching expenses:', fetchExpensesError.message);
+        return;
+      }
+  
+      if (expenses.length > 0) {
+        Alert.alert(
+          'Delete Category',
+          'This category has associated expenses. Are you sure you want to delete this category and all its associated expenses?',
+          [
+            {
+              text: 'Cancel',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+            {
+              text: 'Delete',
+              onPress: async () => {
+                try {
+                  const { error } = await supabase.rpc('delete_category_and_expenses', {
+                    p_category_id: selectedCategory.id
+                  });
+  
+                  if (error) {
+                    console.error('Error deleting category and expenses:', error.message);
+                    return;
+                  }
+  
+                  setCategories(categories.filter((category) => category.id !== selectedCategory.id));
+                  setShowModal(false);
+                } catch (error) {
+                  console.error('Error deleting category and expenses:', error.message);
+                }
+              },
+            },
+          ]
+        );
       } else {
-        setCategories(categories.filter((category) => category.id !== selectedCategory.id));
-        setShowModal(false);
+        const { error } = await supabase.rpc('delete_category_and_expenses', {
+          p_category_id: selectedCategory.id
+        });
+  
+        if (error) {
+          console.error('Error deleting category:', error.message);
+        } else {
+          setCategories(categories.filter((category) => category.id !== selectedCategory.id));
+          setShowModal(false);
+        }
       }
     } catch (error) {
       console.error('Error deleting category:', error.message);
     }
   };
-  
 
   // Add a new category function
   const handleAddCategory = async (newCategory) => {
@@ -159,50 +204,22 @@ export default function BudgetsScreen() {
 
   return (
     <View className="flex-1 bg-gray-800 p-6">
-      <Text className="text-white text-4xl font-bold mb-6 mt-6">
+      <Text className="text-white text-4xl font-bold mt-3 mb-6">
         Set up a monthly budget goal
       </Text>
-      <Text className="text-white mb-4">Total budget is ${totalBudget}</Text>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        className="ml-12 mb-6"
-      >
-        {categories.map((category) => (
-          <TouchableOpacity
-            key={category.id}
-            onPress={() => handleCategorySelect(category)}
-            className="h-20 mr-1"
-          >
-            <View
-              className={`bg-${pressed === category.id ? 'violet' : 'gray'}-500 
-                          h-20 rounded-lg p-4 mr-4 flex-row items-center`}
-            >
-              <Ionicons
-                name={category.icon}
-                size={24}
-                color="white"
-                style={{ marginRight: 8 }}
-              />
-              <View className="flex-1">
-                <Text className="text-white font-bold">{category.category}</Text>
-                {selectedCategory?.id === category.id && (
-                  <Text className="text-white font-bold">
-                    {pressed ? category.amount : ''}
-                  </Text>
-                )}
-              </View>
-            </View>
-          </TouchableOpacity>
-        ))}
 
-        <TouchableOpacity onPress={() => setShowAddCategoryModal(true)}>
-          <View className="bg-gray-500 h-20 rounded-lg p-4 items-center flex-row">
-            <FontAwesome6 name="add" size={28} color="white" />
-            <Text className="text-white font-bold ml-2 ">Add Category</Text>
-          </View>
-        </TouchableOpacity>
-      </ScrollView>
+      <View className="flex-row justify-between mb-6 items-center">
+        <TotalBudget totalBudget={totalBudget} />
+        <AddCategoryButton onPress={() => setShowAddCategoryModal(true)} />
+      </View>
+      
+    
+      <CategoryList 
+        categories={categories} 
+        pressed={pressed} 
+        selectedCategory={selectedCategory}
+        handleCategorySelect={handleCategorySelect} 
+      />
       
       
       <BudgetModal

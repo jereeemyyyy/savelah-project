@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Modal, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, Modal, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ChooseIconPopup from './ChooseIconPopup';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -15,10 +15,37 @@ export default function AddCategoryModal({ visible, onClose, onAddCategory }) {
     setShowIconPopup(false);
   };
 
+  // const handleAddCategory = () => {
+  //   if (categoryName && categoryAmount && categoryIcon) {
+  //     const newCategory = {
+  //       name: categoryName,
+  //       amount: parseFloat(categoryAmount),
+  //       icon: categoryIcon,
+  //     };
+  //     onAddCategory(newCategory);
+  //     setCategoryName('');
+  //     setCategoryAmount('');
+  //     setCategoryIcon(null);
+  //     onClose();
+  //   }
+  // };
+
   const handleAddCategory = () => {
-    if (categoryName && categoryAmount && categoryIcon) {
+    const missingFields = [];
+
+    if (!categoryName.trim()) missingFields.push('Category Name');
+    if (!categoryAmount.trim()) missingFields.push('Category Amount');
+    if (!categoryIcon) missingFields.push('Category Icon');
+
+    if (missingFields.length > 0) {
+      Alert.alert(
+        'Incomplete Information',
+        `Please fill in the following field(s): ${missingFields.join(', ')}`,
+        [{ text: 'OK' }]
+      );
+    } else {
       const newCategory = {
-        name: categoryName,
+        name: categoryName.trim(),
         amount: parseFloat(categoryAmount),
         icon: categoryIcon,
       };
