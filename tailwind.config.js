@@ -17,6 +17,8 @@ module.exports = {
     './app/screens/expenses/components/ExpensesModal.{js,jsx,ts,tsx}',
     './app/screens/budgets/BudgetsScreen.{js,jsx,ts,tsx}',
     './app/screens/leaderboards/LeaderBoardsScreen.{js,jsx,ts,tsx}',
+    './app/screens/leaderboards/components/LeaderBoardItem.{js,jsx,ts,tsx}',
+    './app/screens/leaderboards/LeaderBoardList.{js,jsx,ts,tsx}',
     './app/screens/profile/ProfileScreen.{js,jsx,ts,tsx}',
     './app/screens/profile/components/SignOutButton.{js,jsx,ts,tsx}',
     './app/screens/profile/components/Profile.{js,jsx,ts,tsx}',

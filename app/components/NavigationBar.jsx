@@ -7,7 +7,7 @@ import LeaderBoardsScreen from '../screens/leaderboards/LeaderBoardsScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { supabase } from '../../lib/supabase';
 import { useEffect } from 'react';
-import { updateLoginStreak }   from '../screens/leaderboards/LeaderBoardsScreen';
+import { updateLoginStreak }   from '../screens/leaderboards/components/updateLoginStreak';
 
 
 export default function NavigationBar() {
