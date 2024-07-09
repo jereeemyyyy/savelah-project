@@ -16,7 +16,6 @@ export default function BudgetsScreen() {
   const [pressed, setPressed] = useState(null);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     fetchUserCategories(); 

@@ -4,15 +4,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AddTaskButton from './AddTaskButton';
 import { supabase } from '../../../../lib/supabase';
 import ConfirmationModal from './ConfirmationModal'; // Import the modal component
+import DeleteConfirmationModal from './DeleteConfirmationModal'; // Import the delete modal component
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider } from '@ui-kitten/components';
-
-const defaultCategories = ['Food', 'Transport', 'Housing'];
 
 export default function ToDoList() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
 
   const fetchTasks = async () => {
@@ -57,6 +57,11 @@ export default function ToDoList() {
     setModalVisible(true);
   };
 
+  const handleDeleteConfirmation = (task) => {
+    setSelectedTask(task);
+    setDeleteModalVisible(true);
+  };
+
   const renderItem = ({ item }) => (
     <View className="bg-white p-4 rounded-lg shadow-md mb-4 mx-4">
       <View className="flex-row items-center justify-between">
@@ -75,6 +80,12 @@ export default function ToDoList() {
           className="bg-purple-500 p-3 rounded"
         >
           <Text className="text-white font-bold">Add</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => handleDeleteConfirmation(item)}
+          className="bg-red-500 p-3 rounded ml-2"
+        >
+          <Icon name="times" size={19} color="white" />
         </TouchableOpacity>
       </View>
     </View>
@@ -114,6 +125,16 @@ export default function ToDoList() {
             task={selectedTask}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
+            fetchTasks={fetchTasks}
+          />
+        </ApplicationProvider>
+      )}
+      {selectedTask && (
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <DeleteConfirmationModal
+            task={selectedTask}
+            modalVisible={deleteModalVisible}
+            setModalVisible={setDeleteModalVisible}
             fetchTasks={fetchTasks}
           />
         </ApplicationProvider>

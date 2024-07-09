@@ -8,7 +8,6 @@ export default function HomeScreen() {
 
     const [userId, setUserId] = useState(null);
 
-    
     useEffect(() => {
         const fetchUser = async () => {
             try {
