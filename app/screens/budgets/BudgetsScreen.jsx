@@ -16,6 +16,7 @@ export default function BudgetsScreen() {
   const [pressed, setPressed] = useState(null);
   const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     fetchUserCategories(); 
@@ -177,7 +178,7 @@ export default function BudgetsScreen() {
   const handleAddCategory = async (newCategory) => {
 
     try {
-      const { data: user, error: userError } = await supabase.auth.getUser();
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
   
       if (userError) {
         throw new Error('Error fetching user');
@@ -185,13 +186,38 @@ export default function BudgetsScreen() {
   
       if (!user) throw new Error('User not authenticated');
   
+      
+      // Capitalize the first letter of newCategory.name
+      newCategory.name = newCategory.name.charAt(0).toUpperCase() + newCategory.name.slice(1).toLowerCase();
+      
+      // Check if the category already exists for the user
+      const { data: existingCategories, error: fetchError } = await supabase
+        .from('categories')
+        .select('category')
+        .eq('user_id', user.id) 
+        .eq('category', newCategory.name);
+  
+      if (fetchError) {
+        console.log(fetchError);
+        throw new Error(fetchError);
+      }
+  
+      if (existingCategories && existingCategories.length > 0) {
+        alert('This category has already been created');
+        return;
+      }
+  
       const { data, error } = await supabase
         .from('categories')
-        .insert({ amount: newCategory.amount, icon: newCategory.icon, category: newCategory.name,  })
+        .insert({ 
+          amount: newCategory.amount, 
+          icon: newCategory.icon, 
+          category: newCategory.name 
+        })
         .select();
   
       if (error) {
-        console.log('Error adding category1:', error);
+        console.log('Error adding category:', error);
       } else {
         setCategories([...categories, ...data]);
         setShowAddCategoryModal(false);
@@ -201,6 +227,7 @@ export default function BudgetsScreen() {
     }
     fetchUserCategories();
   };
+  
 
   return (
     <View className="flex-1 bg-gray-800 p-6">
