@@ -12,7 +12,7 @@ export default function ExpensesSummary({userId}) {
   const [currentWeekTotal, setCurrentWeekTotal] = useState(0);
   const [lastWeekTotal, setLastWeekTotal] = useState(0);
 
-  useEffect(() => {
+  function getPieChart()  {
     const fetchExpensesByCategory = async () => {
       try {
         const { data: fetchedData, error } = await supabase.rpc('get_total_expenses_by_category', {
@@ -88,8 +88,9 @@ export default function ExpensesSummary({userId}) {
     return () => {
       supabase.removeChannel(subscription);
     };
+  }
 
-  }, [userId]);
+  useEffect(getPieChart, [userId]);
 
   return (
     <SafeAreaView className="flex-1 justify-start items-center">

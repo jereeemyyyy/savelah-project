@@ -13,6 +13,33 @@ export default function RegistrationCard() {
     const[password, setPassword] = useState('');
     const[repeatPassword, setRepeatPassword] = useState('');
     const[loading, setLoading] = useState(false);
+    const[categories, setCategories] = useState([]);
+
+    const handleAddCategory = async (newCategory) => {
+
+        try {
+          const { data: user, error: userError } = await supabase.auth.getUser();
+      
+          if (userError) {
+            throw new Error('Error fetching user');
+          }
+      
+          if (!user) throw new Error('User not authenticated');
+      
+          const { data, error } = await supabase
+            .from('categories')
+            .insert({ amount: newCategory.amount, icon: newCategory.icon, category: newCategory.name,  })
+            .select();
+      
+          if (error) {
+            console.log('Error adding category:', error);
+          } else {
+            setCategories([...categories, ...data]);
+          }
+        } catch (error) {
+          console.log('Error adding category:', error);
+        }
+      };
 
     async function signUpWithEmail() {
         setLoading(true);
@@ -47,7 +74,29 @@ export default function RegistrationCard() {
         }
 
         Alert.alert("User signed up successfully");
-        setLoading(false); 
+        setLoading(false);
+        
+        const newTransportationCategory = {
+            name: "Transportation",
+            amount: 0,
+            icon: "car",
+        };
+
+        const newFoodCategory = {
+            name: "Food",
+            amount: 0,
+            icon: "restaurant",
+        };
+
+        const newHousingCategory = {
+            name: "Housing",
+            amount: 0,
+            icon: "home",
+        };
+
+        handleAddCategory(newTransportationCategory);
+        handleAddCategory(newFoodCategory);
+        handleAddCategory(newHousingCategory);
 
         // If login is successful, navigate to the Home Screen
         navigation.navigate('NavigationBar');

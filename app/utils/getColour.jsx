@@ -1,7 +1,7 @@
 const predefinedColors = {
     Food: '#FF0000', // red
     Transportation: '#FFFF00', // yellow
-    House: '#0000FF' // blue
+    Housing: '#0000FF' // blue
   };
   
   const stringToColor = (str) => {
