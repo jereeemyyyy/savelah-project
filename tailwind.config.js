@@ -33,6 +33,7 @@ module.exports = {
     './app/screens/home/components/ToDoList.{js,jsx,ts,tsx}',
     './app/screens/home/components/AddTaskButton.{js,jsx,ts,tsx}',
     './app/screens/home/components/ConfirmationModal.{js,jsx,ts,tsx}',
+    './app/screens/home/components/DeleteConfirmationModal.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {},
