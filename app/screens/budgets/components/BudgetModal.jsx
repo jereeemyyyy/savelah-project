@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Modal, Dimensions, Alert, TextInput, KeyboardAvoidingView, Platform, Keyboard} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import Slider from '@react-native-community/slider';
 import { useEffect, useState } from 'react';
 import { Entypo } from '@expo/vector-icons';
 
