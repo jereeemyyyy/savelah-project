@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, View, Text, TouchableOpacity } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { supabase } from '../../../../lib/supabase';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -35,7 +35,12 @@ const ConfirmationModal = ({ task, modalVisible, setModalVisible, fetchTasks }) 
             console.error('Error fetching categories:', error);
         } else {
             console.log('Fetched categories:', data);
-            setCategories(data);
+            if (data.length === 0) {
+                Alert.alert('No categories found!', 'Add a new category in the Budgets page.');
+                setModalVisible(false);
+            } else {
+                setCategories(data);
+            }
         }
     };
 
