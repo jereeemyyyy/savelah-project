@@ -44,6 +44,21 @@ export default function RegistrationCard() {
     async function signUpWithEmail() {
         setLoading(true);
 
+        // Checks if any of the fields are empty
+        if (!firstname || !lastname || !email || !password || !repeatPassword) {
+            let missingFields = [];
+
+            if (!firstname) missingFields.push("First Name");
+            if (!lastname) missingFields.push("Last Name");
+            if (!email) missingFields.push("Email Address");
+            if (!password) missingFields.push("Password");
+            if (!repeatPassword) missingFields.push("Repeat Password");
+
+            Alert.alert(`Please fill in the following fields: ${missingFields.join(", ")}`);
+            setLoading(false);
+            return;
+        }
+
         // Checks if the password and repeat password are the same
         if (password !== repeatPassword) {
             Alert.alert("Passwords do not match. Try Again");
