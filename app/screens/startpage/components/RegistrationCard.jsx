@@ -98,8 +98,8 @@ export default function RegistrationCard() {
         handleAddCategory(newFoodCategory);
         handleAddCategory(newHousingCategory);
 
-        // If login is successful, navigate to the Home Screen
-        navigation.navigate('NavigationBar');
+        // If login is successful, navigate to the first onboarding screen
+        navigation.navigate('Username');
     }
 
     return(
