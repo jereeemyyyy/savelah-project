@@ -7,7 +7,7 @@ const LeaderboardItem = ({ item, index }) => {
     <View className='flex-row justify-between items-center p-4 bg-gray-100 border-b border-gray-200 mt-2 rounded-2xl'>
       <View className='flex-row'>
         <Text className='text-lg font-bold'>{index + 1}. </Text>
-        <Text className='text-lg font-bold'>{item.first_name}</Text>
+        <Text className='text-lg font-bold'>{item.username}</Text>
       </View>
 
       <View className='flex-row bg-zinc-800 rounded-xl px-2 py-1'>
