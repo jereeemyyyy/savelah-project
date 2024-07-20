@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { FontAwesome6 } from '@expo/vector-icons';
 
-const LeaderboardItem = ({ item, index }) => {
+const LeaderboardItem = ({ item }) => {
   return (
     <View className='flex-row justify-between items-center p-4 bg-gray-100 border-b border-gray-200 mt-2 rounded-2xl'>
       <View className='flex-row'>
-        <Text className='text-lg font-bold'>{index + 1}. </Text>
+        <Text className='text-lg font-bold'>{item.index}. </Text>
         <Text className='text-lg font-bold'>{item.username}</Text>
       </View>
 
