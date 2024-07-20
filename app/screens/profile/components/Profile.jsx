@@ -1,6 +1,7 @@
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
+import { supabase } from '../../../../lib/supabase';    
 
 export default function Profile({ userData }) {
     const [profilePicture, setProfilePicture] = useState(null);
@@ -15,13 +16,23 @@ export default function Profile({ userData }) {
     // Get profile name
     const getProfileName = async () => {
         try {
-            if (userData && userData.user_metadata) {
-                setProfileName(userData.user_metadata.first_name + ' ' + userData.user_metadata.last_name);
+            if (userData && userData.id) {
+                const { data, error } = await supabase
+                    .from('profiles')
+                    .select('username')
+                    .eq('id', userData.id)
+                    .single();
+
+                if (error) {
+                    console.error('Error fetching profile:', error.message);
+                } else if (data) {
+                    setProfileName(data.username);
+                }
             }
-        } catch(error) {
+        } catch (error) {
             console.error('Error getting user:', error.message);
         }
-    } 
+    };
 
     // Allow user to select a profile picture
     const pickProfilePicture = async () => {

@@ -10,11 +10,12 @@ export default function Settings({ userData }) {
         if (userData) {
             setUserEmail(userData.email);
             if (userData.user_metadata) {
-                setUserName(userData.user_metadata.first_name);
+                setUserName(userData.user_metadata.first_name + ' ' + userData.user_metadata.last_name);
             }
         }
     }, [userData]);
 
+    
     return (
         <View className="mb-4 pt-4 bg-white rounded-xl">
             <TouchableOpacity className="justify-between flex-row items-center mb-4 mx-2">
