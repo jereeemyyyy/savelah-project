@@ -24,12 +24,12 @@ export default function DeleteConfirmationModal({ task, modalVisible, setModalVi
 
   return (
     <Modal
-      animationType="slide"
+      animationType="fade"
       transparent={true}
       visible={modalVisible}
       onRequestClose={() => setModalVisible(false)}
     >
-      <View className="flex-1 justify-center items-center bg-black bg-opacity-50">
+      <View className="flex-1 justify-center items-center" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
         <View className="bg-white p-6 rounded-lg shadow-lg">
           <Text className="text-lg font-bold mb-4">Are you sure you want to delete this task?</Text>
           <View className="flex-row justify-end">
