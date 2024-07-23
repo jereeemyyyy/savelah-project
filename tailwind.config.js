@@ -36,6 +36,8 @@ module.exports = {
     './app/screens/home/components/AddTaskButton.{js,jsx,ts,tsx}',
     './app/screens/home/components/ConfirmationModal.{js,jsx,ts,tsx}',
     './app/screens/home/components/DeleteConfirmationModal.{js,jsx,ts,tsx}',
+    './app/screens/home/components/TaskCard.{js,jsx,ts,tsx}',
+    './app/screens/home/components/TasksList.{js,jsx,ts,tsx}',
     './app/screens/onboarding/UsernameScreen.{js,jsx,ts,tsx}',
     './app/screens/onboarding/ProfilePictureScreen.{js,jsx,ts,tsx}',
     './app/screens/onboarding/BankDetailsScreen.{js,jsx,ts,tsx}',
