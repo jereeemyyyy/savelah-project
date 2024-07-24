@@ -42,6 +42,9 @@ module.exports = {
     './app/screens/onboarding/ProfilePictureScreen.{js,jsx,ts,tsx}',
     './app/screens/onboarding/BankDetailsScreen.{js,jsx,ts,tsx}',
     './app/screens/onboarding/IntroScreen.{js,jsx,ts,tsx}',
+    './app/screens/onboarding/components/Slider.{js,jsx,ts,tsx}',
+    './app/screens/onboarding/components/Pagination.{js,jsx,ts,tsx}',
+    './app/screens/onboarding/components/SlideItem.{js,jsx,ts,tsx}'
   ],
   theme: {
     extend: {},
