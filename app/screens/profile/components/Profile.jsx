@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Image, Modal, TextInput, Button, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Modal, TextInput, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { supabase } from '../../../../lib/supabase'; 
@@ -12,17 +12,17 @@ export default function Profile({ userData }) {
 
     useEffect(() => {
         if (userData) {
-            getProfileName();
+            getProfileData();
         }
     }, [userData]);
 
-    // Get profile name
-    const getProfileName = async () => {
+    // Get profile name & picture
+    const getProfileData = async () => {
         try {
             if (userData && userData.id) {
                 const { data, error } = await supabase
                     .from('profiles')
-                    .select('username')
+                    .select('username, profile_picture')
                     .eq('id', userData.id)
                     .single();
 
@@ -30,6 +30,7 @@ export default function Profile({ userData }) {
                     console.error('Error fetching profile:', error.message);
                 } else if (data) {
                     setProfileName(data.username);
+                    setProfilePicture(data.profile_picture);
                 }
             }
         } catch (error) {
@@ -47,7 +48,42 @@ export default function Profile({ userData }) {
         });
 
         if (!result.canceled) {
-            setProfilePicture(result.assets[0].uri);
+            const source = result.assets[0];
+            const fileExt = source.uri.split('.').pop();
+            const fileName = `${userData.id}.${fileExt}`;
+            const filePath = `profile-pictures/${fileName}_${Date.now()}`;
+
+            const formData = new FormData();
+            formData.append('file', {
+                uri: source.uri,
+                name: fileName,
+                type: `image/${fileExt}`
+            });
+
+            let { error: uploadError } = await supabase.storage
+                .from('profile-pictures')
+                .upload(filePath, formData);
+
+            if (uploadError) {
+                console.error('Error uploading image:', uploadError.message);
+                Alert.alert('Error', 'Failed to upload profile picture');
+                return;
+            }
+
+            const { data: imageUrl } = await supabase.storage
+                .from('profile-pictures')
+                .getPublicUrl(filePath);
+
+            const { error: updateError } = await supabase
+                .from('profiles')
+                .update({ profile_picture: imageUrl.publicUrl })
+                .eq('id', userData.id);
+
+            if (updateError) {
+                console.error('Error updating profile picture:', updateError.message);
+            } else {
+                setProfilePicture(imageUrl.publicUrl);
+            }
         }
     };
 
@@ -58,8 +94,7 @@ export default function Profile({ userData }) {
             Alert.alert('Invalid Input', 'Please enter a new profile name');
             return;
         }
-
-
+        
         try {
             const { error } = await supabase
                 .from('profiles')
@@ -88,7 +123,9 @@ export default function Profile({ userData }) {
                 {profilePicture ? (
                     <Image source={{ uri: profilePicture }} className="w-20 h-20 rounded-full mr-4" />
                 ) : (
-                    <View className="w-20 h-20 bg-gray-200 rounded-full mr-4" />
+                    <View className="w-20 h-20 bg-gray-200 rounded-full mr-4 items-center flex-row justify-center">
+                        <MaterialIcons name="add-a-photo" size={24} color="black"/>
+                    </View>
                 )}
             </TouchableOpacity>
             <View>
