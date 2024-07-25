@@ -1,10 +1,10 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import BackButton from '../../components/BackButton';
 import * as ImagePicker from 'expo-image-picker';
 import { supabase } from '../../../lib/supabase';
 import { useState } from 'react';
-
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function ProfilePictureScreen() {
     const navigation = useNavigation();
@@ -16,76 +16,66 @@ export default function ProfilePictureScreen() {
         navigation.navigate('BankDetails', { username, userId });
     };
 
-    const pickImage = async () => {
-        // Ask the user for permission to access the gallery
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-            alert('Sorry, we need camera roll permissions to make this work!');
-            return;
-        }
-
-        // Launch image picker
+    const pickProfilePicture = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [1, 1],
+            aspect: [4, 3],
             quality: 1,
         });
 
         if (!result.canceled) {
-            const { uri } = result.assets[0];
-            console.log('Selected image URI:', uri);
+            const source = result.assets[0];
+            const fileExt = source.uri.split('.').pop();
+            const fileName = `${userId}.${fileExt}`;
+            const filePath = `profile-pictures/${fileName}_${Date.now()}`;
 
-            try {
-                // Convert image to blob
-                const response = await fetch(uri);
-                const blob = await response.blob();
-                console.log('Image Blob:', blob);
+            const formData = new FormData();
+            formData.append('file', {
+                uri: source.uri,
+                name: fileName,
+                type: `image/${fileExt}`
+            });
 
-                // Create file path and name
-                const fileExt = uri.split('.').pop();
-                const fileName = `${userId}.${fileExt}`;
-                const filePath = `${fileName}`;
+            let { error: uploadError } = await supabase.storage
+                .from('profile-pictures')
+                .upload(filePath, formData);
 
-                // Create a file object for Supabase upload
-                const file = new File([blob], fileName, { type: blob.type });
-                
-                // Upload the image to Supabase storage
-                const { error } = await supabase.storage
-                    .from('profile-pictures')
-                    .upload(filePath, file, {
-                        cacheControl: '3600',
-                        upsert: true
-                    });
+            if (uploadError) {
+                console.error('Error uploading image:', uploadError.message);
+                Alert.alert('Error', 'Failed to upload profile picture');
+                return;
+            }
 
-                if (error) {
-                    console.error('Error uploading image:', error);
-                    alert('Error uploading image.');
-                } else {
-                    const { data } = supabase.storage
-                        .from('profile-pictures')
-                        .getPublicUrl(filePath);
+            const { data: imageUrl } = await supabase.storage
+                .from('profile-pictures')
+                .getPublicUrl(filePath);
 
-                    console.log('Public URL:', data.publicUrl);
-                    setProfilePicture(data.publicUrl);
-                }
-            } catch (error) {
-                console.error('Error fetching image URI:', error);
-                alert('Error fetching image URI.');
+            const { error: updateError } = await supabase
+                .from('profiles')
+                .update({ profile_picture: imageUrl.publicUrl })
+                .eq('id', userId);
+
+            if (updateError) {
+                console.error('Error updating profile picture:', updateError.message);
+            } else {
+                setProfilePicture(imageUrl.publicUrl);
             }
         }
-    };
+    }; 
 
     return (
         <View className="flex-1 bg-gray-800">
             <BackButton />
             <Text className="text-4xl font-bold text-white m-4">Add a Profile Picture</Text>
             <Text className="text-lg text-gray-400 mx-4 my-2">Customize your profile by adding a Profile Picture!</Text>
-            <TouchableOpacity className="items-center my-4 ml-5" onPress={pickImage}>
+            <TouchableOpacity className="items-center my-4" onPress={pickProfilePicture}>
                 {profilePicture ? (
-                    <Image source={{ uri: profilePicture }} className="w-20 h-20 rounded-full" />
+                    <Image source={{ uri: profilePicture }} className="w-36 h-36 rounded-full" />
                 ) : (
-                    <View className="w-20 h-20 bg-gray-200 rounded-full mr-4" />
+                    <View className="w-36 h-36 bg-gray-200 rounded-full items-center justify-center">
+                        <MaterialIcons name="add-a-photo" size={24} color="black"/>
+                    </View>
                 )}
             </TouchableOpacity>
 
