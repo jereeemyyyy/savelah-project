@@ -6,10 +6,10 @@ import BackButton from '../../components/BackButton';
 
 // Example data for carousel items
 const carouselData = [
-  { id: 1, image: require('../../assets/images/test.jpg'), text: 'Real Time Updates' },
-  { id: 2, image: require('../../assets/images/test.jpg'), text: 'Track your expenses easily.' },
-  { id: 3, image: require('../../assets/images/test.jpg'), text: 'Stay on top of your budget.' },
-  { id: 4, image: require('../../assets/images/test.jpg'), text: 'Challenge your friends.' },
+  { id: 1, image: require('../../assets/images/homescreen.png'), text: 'Real time updates on your transactions' },
+  { id: 2, image: require('../../assets/images/expensescreen.png'), text: 'Track your expenses easily.' },
+  { id: 3, image: require('../../assets/images/budgetscreen.png'), text: 'Stay on top of your budget.' },
+  { id: 4, image: require('../../assets/images/leaderboardscreen.png'), text: 'Challenge your friends.' },
 ];
 
 export default function IntroScreen() {
@@ -25,8 +25,10 @@ export default function IntroScreen() {
 
   const renderItem = ({ item }) => (
     <View className="items-center">
+        
       <Image source={item.image} className="h-96 w-full mb-4" resizeMode="contain" />
-      <Text className="text-white text-lg">{item.text}</Text>
+      <Text className="font-bold text-white text-2xl p-4 w-72 text-center">{item.text}</Text>
+      
     </View>
   );
 
@@ -45,7 +47,7 @@ export default function IntroScreen() {
     <View className="bg-gray-800 flex-1">
       <BackButton />
       <Text className="text-white text-4xl font-bold mx-4 mt-4 mb-2">Welcome {username}!</Text>
-      <Text className="text-gray-400 text-lg m-4">Here’s a short intro on how to use the app.</Text> 
+      <Text className="text-gray-400 text-lg m-4 -mt-1">Here’s a short intro on how to use the app.</Text> 
       
       <View className="flex-1 items-center justify-center m-4">
         <Carousel
