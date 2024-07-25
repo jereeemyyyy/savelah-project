@@ -11,38 +11,60 @@ export default function AddTaskButton({ addTask, fetchTasks }) {
   const [tasks, setTasks] = useState([]);
 
   const handleAddTask = async () => {
-    if (title && description && amount) {
-      const { data, error } = await supabase
-        .from('to_do_list')
-        .insert([
-          {
-            title,
-            description,
-            amount_spent: parseInt(amount),
-          },
-        ]);
+    let missingFields = [];
 
-      if (error) {
-        Alert.alert('Error', error.message);
-      } else {
-        const newTask = {
-          id: Date.now(),
+    if (!title) missingFields.push("Title");
+    if (!description) missingFields.push("Description");
+    if (!amount) missingFields.push("Amount");
+
+    if (missingFields.length > 0) {
+      Alert.alert(`Please fill in the following fields: ${missingFields.join(", ")}`);
+      return;
+    }
+
+    if (isNaN(amount)) {
+      Alert.alert('Error', 'Amount must be a number.');
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from('to_do_list')
+      .insert([
+        {
           title,
           description,
-          amount: parseFloat(amount),
-        };
-        addTask(newTask);
-        setModalVisible(false);
-        setTitle('');
-        setDescription('');
-        setAmount('');
-      }
-      setTimeout(() => {
-        setTasks();
-      }, 1000);
-      fetchTasks();
+          amount_spent: parseInt(amount),
+        },
+      ]);
+
+    if (error) {
+      Alert.alert('Error', error.message);
+    } else {
+      const newTask = {
+        id: Date.now(),
+        title,
+        description,
+        amount: parseFloat(amount),
+      };
+      addTask(newTask);
+      setModalVisible(false);
+      setTitle('');
+      setDescription('');
+      setAmount('');
     }
+    setTimeout(() => {
+      setTasks();
+    }, 1000);
+    fetchTasks();
   };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+    setTitle('');
+    setDescription('');
+    setAmount('');
+  }
+
 
   return (
     <View className="items-center justify-center m-2">
@@ -66,7 +88,7 @@ export default function AddTaskButton({ addTask, fetchTasks }) {
           <View className="bg-white rounded-2xl p-4 py-8 items-center shadow-lg">
               <Text className="-mt-3 text-2xl font-bold text-black">Create New Expense</Text>
               <TouchableOpacity
-                            onPress={() => setModalVisible(false)}
+                            onPress={handleCloseModal}
                             style={{ position: 'absolute', top: 15, right: 15 }}
                             className=""
                           
