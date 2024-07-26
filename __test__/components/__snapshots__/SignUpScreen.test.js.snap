@@ -1,0 +1,595 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpScreen renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      {
+        "backgroundColor": "#1f2937",
+      },
+    ]
+  }
+  testID="signUpScreen"
+>
+  <RCTSafeAreaView
+    style={
+      [
+        {
+          "display": "flex",
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "flexDirection": "row",
+          },
+          {
+            "justifyContent": "flex-start",
+          },
+        ]
+      }
+      testID="backButtonContainer"
+    >
+      <View
+        style={
+          [
+            {
+              "flexDirection": "row",
+            },
+            {
+              "justifyContent": "flex-start",
+            },
+          ]
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "#6366f1",
+              "borderBottomLeftRadius": 16,
+              "borderTopRightRadius": 16,
+              "marginLeft": 16,
+              "opacity": 1,
+              "paddingBottom": 8,
+              "paddingLeft": 8,
+              "paddingRight": 8,
+              "paddingTop": 8,
+            }
+          }
+        >
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight="20"
+            bbWidth="20"
+            color="white"
+            data-slot="icon"
+            fill="currentColor"
+            focusable={false}
+            height="20"
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                {
+                  "flex": 0,
+                  "height": 20,
+                  "width": 20,
+                },
+              ]
+            }
+            tintColor="white"
+            vbHeight={24}
+            vbWidth={24}
+            width="20"
+          >
+            <RNSVGGroup
+              fill={
+                {
+                  "type": 2,
+                }
+              }
+              propList={
+                [
+                  "fill",
+                ]
+              }
+            >
+              <RNSVGPath
+                clipRule={0}
+                d="M11.03 3.97a.75.75 0 0 1 0 1.06l-6.22 6.22H21a.75.75 0 0 1 0 1.5H4.81l6.22 6.22a.75.75 0 1 1-1.06 1.06l-7.5-7.5a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 0 1 1.06 0Z"
+                fill={
+                  {
+                    "payload": 4278190080,
+                    "type": 0,
+                  }
+                }
+                fillRule={0}
+                propList={
+                  [
+                    "fillRule",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        [
+          {
+            "flexDirection": "row",
+          },
+          {
+            "paddingLeft": 28,
+          },
+          {
+            "paddingTop": 32,
+          },
+        ]
+      }
+      testID="registrationHeader"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#fff",
+            },
+            {
+              "fontWeight": "700",
+            },
+            {
+              "fontSize": 48,
+              "lineHeight": 48,
+            },
+            {
+              "textAlign": "left",
+            },
+          ]
+        }
+        testID="registrationHeaderText"
+      >
+        Registration
+      </Text>
+    </View>
+    <View
+      style={
+        [
+          {
+            "flexDirection": "row",
+          },
+          {
+            "paddingLeft": 28,
+          },
+          {
+            "paddingBottom": 40,
+          },
+        ]
+      }
+      testID="createAccountTextContainer"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#9ca3af",
+            },
+            {
+              "fontWeight": "700",
+            },
+            {
+              "fontSize": 14,
+              "lineHeight": 20,
+            },
+            {
+              "textAlign": "left",
+            },
+          ]
+        }
+        testID="createAccountText"
+      >
+        Create an account to continue
+      </Text>
+    </View>
+  </RCTSafeAreaView>
+  <RCTScrollView
+    style={
+      [
+        {
+          "flexBasis": "0%",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+        {
+          "backgroundColor": "#fff",
+        },
+        {
+          "paddingLeft": 32,
+          "paddingRight": 32,
+        },
+        {
+          "paddingTop": 32,
+        },
+        {
+          "borderTopLeftRadius": 50,
+          "borderTopRightRadius": 50,
+        },
+      ]
+    }
+  >
+    <View>
+      <View>
+        <Text
+          style={
+            [
+              {
+                "color": "#374151",
+              },
+              {
+                "marginLeft": 16,
+              },
+            ]
+          }
+        >
+          First Name
+        </Text>
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Enter First Name"
+          style={
+            [
+              {
+                "paddingBottom": 12,
+                "paddingLeft": 12,
+                "paddingRight": 12,
+                "paddingTop": 12,
+              },
+              {
+                "backgroundColor": "#f3f4f6",
+              },
+              {
+                "color": "#374151",
+              },
+              {
+                "borderBottomLeftRadius": 16,
+                "borderBottomRightRadius": 16,
+                "borderTopLeftRadius": 16,
+                "borderTopRightRadius": 16,
+              },
+              {
+                "marginBottom": 12,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+          value=""
+        />
+        <Text
+          style={
+            [
+              {
+                "color": "#374151",
+              },
+              {
+                "marginLeft": 16,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+        >
+          Last Name
+        </Text>
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Enter Last Name"
+          style={
+            [
+              {
+                "paddingBottom": 12,
+                "paddingLeft": 12,
+                "paddingRight": 12,
+                "paddingTop": 12,
+              },
+              {
+                "backgroundColor": "#f3f4f6",
+              },
+              {
+                "color": "#374151",
+              },
+              {
+                "borderBottomLeftRadius": 16,
+                "borderBottomRightRadius": 16,
+                "borderTopLeftRadius": 16,
+                "borderTopRightRadius": 16,
+              },
+              {
+                "marginBottom": 12,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+          value=""
+        />
+        <Text
+          style={
+            [
+              {
+                "color": "#374151",
+              },
+              {
+                "marginLeft": 16,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+        >
+          Email Address
+        </Text>
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Enter Email"
+          style={
+            [
+              {
+                "paddingBottom": 12,
+                "paddingLeft": 12,
+                "paddingRight": 12,
+                "paddingTop": 12,
+              },
+              {
+                "backgroundColor": "#f3f4f6",
+              },
+              {
+                "color": "#374151",
+              },
+              {
+                "borderBottomLeftRadius": 16,
+                "borderBottomRightRadius": 16,
+                "borderTopLeftRadius": 16,
+                "borderTopRightRadius": 16,
+              },
+              {
+                "marginBottom": 12,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+          value=""
+        />
+        <Text
+          style={
+            [
+              {
+                "color": "#374151",
+              },
+              {
+                "marginLeft": 16,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+        >
+          Password
+        </Text>
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Enter Password"
+          secureTextEntry={true}
+          style={
+            [
+              {
+                "paddingBottom": 12,
+                "paddingLeft": 12,
+                "paddingRight": 12,
+                "paddingTop": 12,
+              },
+              {
+                "backgroundColor": "#f3f4f6",
+              },
+              {
+                "color": "#374151",
+              },
+              {
+                "borderBottomLeftRadius": 16,
+                "borderBottomRightRadius": 16,
+                "borderTopLeftRadius": 16,
+                "borderTopRightRadius": 16,
+              },
+              {
+                "marginBottom": 12,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+          value=""
+        />
+        <Text
+          style={
+            [
+              {
+                "color": "#374151",
+              },
+              {
+                "marginLeft": 16,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+        >
+          Repeat Password
+        </Text>
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Enter Password Again"
+          secureTextEntry={true}
+          style={
+            [
+              {
+                "paddingBottom": 12,
+                "paddingLeft": 12,
+                "paddingRight": 12,
+                "paddingTop": 12,
+              },
+              {
+                "backgroundColor": "#f3f4f6",
+              },
+              {
+                "color": "#374151",
+              },
+              {
+                "borderBottomLeftRadius": 16,
+                "borderBottomRightRadius": 16,
+                "borderTopLeftRadius": 16,
+                "borderTopRightRadius": 16,
+              },
+              {
+                "marginBottom": 12,
+              },
+              [
+                {
+                  "marginTop": 8,
+                },
+              ],
+            ]
+          }
+          value=""
+        />
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "#6366f1",
+              "borderBottomLeftRadius": 12,
+              "borderBottomRightRadius": 12,
+              "borderTopLeftRadius": 12,
+              "borderTopRightRadius": 12,
+              "marginTop": 8,
+              "opacity": 1,
+              "paddingBottom": 12,
+              "paddingTop": 12,
+            }
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "fontWeight": "700",
+                },
+                {
+                  "textAlign": "center",
+                },
+                {
+                  "color": "#fff",
+                },
+              ]
+            }
+          >
+            Sign Up
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
