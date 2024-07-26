@@ -8,15 +8,15 @@ export default function LoginScreen() {
   
     
     return (
-        <View className="flex-1 bg-gray-800">
+        <View className="flex-1 bg-gray-800" testID="loginScreen">
             <SafeAreaView className="flex" >
                 <BackButton/>
-                <View className="flex-row justify-center align-items-center pl-7 pt-14 pb-14">
+                <View className="flex-row justify-center align-items-center pl-7 pt-14 pb-14" testID="backButtonContainer">
                     <Image source={require('../../assets/images/logo.png')} 
                            style={{width: 340, height: 55}}/>
                 </View>     
             </SafeAreaView>
-            <LoginCard/>
+            <LoginCard testID="loginCard"/>
         </View>
        
     );
