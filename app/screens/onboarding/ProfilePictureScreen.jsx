@@ -66,10 +66,10 @@ export default function ProfilePictureScreen() {
 
     return (
         <View className="flex-1 bg-gray-800">
-            <BackButton />
-            <Text className="text-4xl font-bold text-white m-4">Add a Profile Picture</Text>
-            <Text className="text-lg text-gray-400 mx-4 my-2">Customize your profile by adding a Profile Picture!</Text>
-            <TouchableOpacity className="items-center my-4" onPress={pickProfilePicture}>
+            <BackButton testID="backButton" />
+            <Text testID="titleText" className="text-4xl font-bold text-white m-4">Add a Profile Picture</Text>
+            <Text testID="subtitleText" className="text-lg text-gray-400 mx-4 my-2">Customize your profile by adding a Profile Picture!</Text>
+            <TouchableOpacity testID="profilePictureButton" className="items-center my-4" onPress={pickProfilePicture}>
                 {profilePicture ? (
                     <Image source={{ uri: profilePicture }} className="w-36 h-36 rounded-full" />
                 ) : (
@@ -80,10 +80,10 @@ export default function ProfilePictureScreen() {
             </TouchableOpacity>
 
             <View className="flex-1 items-center m-4">
-                <TouchableOpacity className="py-3 bg-indigo-500 rounded mb-4 w-20 items-center" onPress={handleNext}>
+                <TouchableOpacity testID="nextButton" className="py-3 bg-indigo-500 rounded mb-4 w-20 items-center" onPress={handleNext}>
                     <Text className="text-white">Next</Text>
                 </TouchableOpacity>
-                <TouchableOpacity className="py-3 bg-gray-500 rounded w-20 items-center" onPress={handleNext}>
+                <TouchableOpacity testID="skipButton" className="py-3 bg-gray-500 rounded w-20 items-center" onPress={handleNext}>
                     <Text className="text-white">Skip</Text>
                 </TouchableOpacity>
             </View>

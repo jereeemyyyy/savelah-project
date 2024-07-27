@@ -1,0 +1,429 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IntroScreen renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#1f2937",
+      },
+      {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexDirection": "row",
+        },
+        {
+          "justifyContent": "flex-start",
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#6366f1",
+          "borderBottomLeftRadius": 16,
+          "borderTopRightRadius": 16,
+          "marginLeft": 16,
+          "opacity": 1,
+          "paddingBottom": 8,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "paddingTop": 8,
+        }
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight="20"
+        bbWidth="20"
+        color="white"
+        data-slot="icon"
+        fill="currentColor"
+        focusable={false}
+        height="20"
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 20,
+              "width": 20,
+            },
+          ]
+        }
+        tintColor="white"
+        vbHeight={24}
+        vbWidth={24}
+        width="20"
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "type": 2,
+            }
+          }
+          propList={
+            [
+              "fill",
+            ]
+          }
+        >
+          <RNSVGPath
+            clipRule={0}
+            d="M11.03 3.97a.75.75 0 0 1 0 1.06l-6.22 6.22H21a.75.75 0 0 1 0 1.5H4.81l6.22 6.22a.75.75 0 1 1-1.06 1.06l-7.5-7.5a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 0 1 1.06 0Z"
+            fill={
+              {
+                "payload": 4278190080,
+                "type": 0,
+              }
+            }
+            fillRule={0}
+            propList={
+              [
+                "fillRule",
+              ]
+            }
+          />
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+  <Text
+    style={
+      [
+        {
+          "color": "#fff",
+        },
+        {
+          "fontSize": 36,
+          "lineHeight": 40,
+        },
+        {
+          "fontWeight": "700",
+        },
+        {
+          "marginLeft": 16,
+          "marginRight": 16,
+        },
+        {
+          "marginTop": 16,
+        },
+        {
+          "marginBottom": 8,
+        },
+      ]
+    }
+    testID="welcomeText"
+  >
+    Welcome 
+    testuser
+    !
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "color": "#9ca3af",
+        },
+        {
+          "fontSize": 18,
+          "lineHeight": 28,
+        },
+        {
+          "marginBottom": 16,
+          "marginLeft": 16,
+          "marginRight": 16,
+          "marginTop": 16,
+        },
+        {
+          "marginTop": -4,
+        },
+      ]
+    }
+    testID="introText"
+  >
+    Here’s a short intro on how to use the app.
+  </Text>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "0%",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+        {
+          "alignItems": "center",
+        },
+        {
+          "justifyContent": "center",
+        },
+        {
+          "marginBottom": 16,
+          "marginLeft": 16,
+          "marginRight": 16,
+          "marginTop": 16,
+        },
+      ]
+    }
+  >
+    <Carousel
+      autoPlay={true}
+      autoPlayInterval={5000}
+      data={
+        [
+          {
+            "id": 1,
+            "image": 1,
+            "text": "Real time updates on your transactions",
+          },
+          {
+            "id": 2,
+            "image": 1,
+            "text": "Track your expenses easily.",
+          },
+          {
+            "id": 3,
+            "image": 1,
+            "text": "Stay on top of your budget.",
+          },
+          {
+            "id": 4,
+            "image": 1,
+            "text": "Challenge your friends.",
+          },
+        ]
+      }
+      height={500}
+      loop={true}
+      onSnapToItem={[Function]}
+      renderItem={[Function]}
+      style={
+        [
+          {
+            "marginTop": -16,
+          },
+        ]
+      }
+      testID="carousel"
+      width={300}
+    />
+    <View
+      style={
+        [
+          {
+            "flexDirection": "row",
+          },
+          {
+            "justifyContent": "center",
+          },
+          {
+            "marginTop": 16,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "height": 8,
+            },
+            {
+              "width": 8,
+            },
+            {
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+            },
+            {
+              "marginLeft": 4,
+              "marginRight": 4,
+            },
+            {
+              "backgroundColor": "#6366f1",
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 8,
+            },
+            {
+              "width": 8,
+            },
+            {
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+            },
+            {
+              "marginLeft": 4,
+              "marginRight": 4,
+            },
+            {
+              "backgroundColor": "#9ca3af",
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 8,
+            },
+            {
+              "width": 8,
+            },
+            {
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+            },
+            {
+              "marginLeft": 4,
+              "marginRight": 4,
+            },
+            {
+              "backgroundColor": "#9ca3af",
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          [
+            {
+              "height": 8,
+            },
+            {
+              "width": 8,
+            },
+            {
+              "borderBottomLeftRadius": 9999,
+              "borderBottomRightRadius": 9999,
+              "borderTopLeftRadius": 9999,
+              "borderTopRightRadius": 9999,
+            },
+            {
+              "marginLeft": 4,
+              "marginRight": 4,
+            },
+            {
+              "backgroundColor": "#9ca3af",
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#6366f1",
+          "borderBottomLeftRadius": 4,
+          "borderBottomRightRadius": 4,
+          "borderTopLeftRadius": 4,
+          "borderTopRightRadius": 4,
+          "marginTop": 24,
+          "opacity": 1,
+          "paddingBottom": 12,
+          "paddingTop": 12,
+          "width": 160,
+        }
+      }
+      testID="finishButton"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Finish
+      </Text>
+    </View>
+  </View>
+</View>
+`;
