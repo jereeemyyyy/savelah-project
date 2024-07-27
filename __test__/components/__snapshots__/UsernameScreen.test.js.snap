@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsernameScreen renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      {
+        "backgroundColor": "#1f2937",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "fontWeight": "700",
+        },
+        {
+          "fontSize": 36,
+          "lineHeight": 40,
+        },
+        {
+          "width": 288,
+        },
+        {
+          "marginTop": 32,
+        },
+        {
+          "marginBottom": 16,
+        },
+        {
+          "marginLeft": 16,
+          "marginRight": 16,
+        },
+        {
+          "color": "#fff",
+        },
+      ]
+    }
+    testID="welcomeText"
+  >
+    Welcome to SaveLah!
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "fontSize": 18,
+          "lineHeight": 28,
+        },
+        {
+          "marginLeft": 16,
+          "marginRight": 16,
+        },
+        {
+          "marginBottom": 16,
+        },
+        {
+          "color": "#9ca3af",
+        },
+      ]
+    }
+    testID="introText"
+  >
+    Get started by creating a Username.
+  </Text>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "0%",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+        {
+          "alignItems": "center",
+        },
+      ]
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Enter Username"
+      style={
+        [
+          {
+            "paddingBottom": 12,
+            "paddingLeft": 12,
+            "paddingRight": 12,
+            "paddingTop": 12,
+          },
+          {
+            "backgroundColor": "#f3f4f6",
+          },
+          {
+            "borderBottomLeftRadius": 4,
+            "borderBottomRightRadius": 4,
+            "borderTopLeftRadius": 4,
+            "borderTopRightRadius": 4,
+          },
+          {
+            "marginBottom": 16,
+          },
+          {
+            "width": 208,
+          },
+        ]
+      }
+      testID="usernameInput"
+      value=""
+    />
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#6366f1",
+          "borderBottomLeftRadius": 4,
+          "borderBottomRightRadius": 4,
+          "borderTopLeftRadius": 4,
+          "borderTopRightRadius": 4,
+          "marginBottom": 16,
+          "opacity": 1,
+          "paddingBottom": 12,
+          "paddingTop": 12,
+          "width": 80,
+        }
+      }
+      testID="nextButton"
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#fff",
+            },
+          ]
+        }
+      >
+        Next
+      </Text>
+    </View>
+  </View>
+</View>
+`;

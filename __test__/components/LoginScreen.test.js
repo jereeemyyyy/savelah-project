@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import LoginScreen from '../../app/screens/startpage/LoginScreen'; // Update with the correct path
-import BackButton from '../../app/components/BackButton'; // Update with the correct path
+import LoginScreen from '../../app/screens/startpage/LoginScreen'; 
+import BackButton from '../../app/components/BackButton'; 
 
 
 jest.mock('@react-navigation/native', () => {

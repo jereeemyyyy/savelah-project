@@ -8,7 +8,6 @@ export default function UsernameScreen() {
     const navigation = useNavigation();
     const [userId, setUserId] = useState(null);
 
-    // Retrieve the current user's information
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -26,11 +25,9 @@ export default function UsernameScreen() {
         fetchUser();
     }, []);
 
-
     const handleNext = async () => {
         const user_Id = userId;
 
-        // Call the function to save the username
         const { error } = await saveUsername(user_Id, username);
 
         if (error) {
@@ -40,8 +37,6 @@ export default function UsernameScreen() {
         }
     };
 
-
-    // Insert the username into the profiles table
     const saveUsername = async (userId, username) => { 
         const { data, error } = await supabase
             .from('profiles')
@@ -51,25 +46,27 @@ export default function UsernameScreen() {
         return { data, error };
     };
 
-
-
     return (
         <View className="flex-1 bg-gray-800">
-            <Text className="font-bold text-4xl w-72 mt-8 mb-4 mx-4 text-white">Welcome to SaveLah!</Text>
-            <Text className="text-lg mx-4 mb-4 text-gray-400">Get started by creating a Username.</Text>
+            <Text testID="welcomeText" className="font-bold text-4xl w-72 mt-8 mb-4 mx-4 text-white">Welcome to SaveLah!</Text>
+            <Text testID="introText" className="text-lg mx-4 mb-4 text-gray-400">Get started by creating a Username.</Text>
 
             <View className="flex-1 items-center">
                 <TextInput
+                    testID="usernameInput"
                     className="p-3 bg-gray-100 rounded mb-4 w-52"
                     value={username}
                     onChangeText={setUsername}
                     placeholder="Enter Username"
                 />
-                <TouchableOpacity className="py-3 bg-indigo-500 rounded mb-4 w-20 items-center" onPress={handleNext}>
-                        <Text className="text-white">Next</Text>
+                <TouchableOpacity
+                    testID="nextButton"
+                    className="py-3 bg-indigo-500 rounded mb-4 w-20 items-center"
+                    onPress={handleNext}
+                >
+                    <Text className="text-white">Next</Text>
                 </TouchableOpacity>
             </View>
-            
         </View>
     );
 }

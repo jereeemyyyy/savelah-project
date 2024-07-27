@@ -25,10 +25,8 @@ export default function IntroScreen() {
 
   const renderItem = ({ item }) => (
     <View className="items-center">
-        
       <Image source={item.image} className="h-96 w-full mb-4" resizeMode="contain" />
       <Text className="font-bold text-white text-2xl p-4 w-72 text-center">{item.text}</Text>
-      
     </View>
   );
 
@@ -45,9 +43,9 @@ export default function IntroScreen() {
 
   return (
     <View className="bg-gray-800 flex-1">
-      <BackButton />
-      <Text className="text-white text-4xl font-bold mx-4 mt-4 mb-2">Welcome {username}!</Text>
-      <Text className="text-gray-400 text-lg m-4 -mt-1">Here’s a short intro on how to use the app.</Text> 
+      <BackButton testID="backButton" />
+      <Text testID="welcomeText" className="text-white text-4xl font-bold mx-4 mt-4 mb-2">Welcome {username}!</Text>
+      <Text testID="introText" className="text-gray-400 text-lg m-4 -mt-1">Here’s a short intro on how to use the app.</Text> 
       
       <View className="flex-1 items-center justify-center m-4">
         <Carousel
@@ -60,10 +58,11 @@ export default function IntroScreen() {
           onSnapToItem={(index) => setCurrentIndex(index)}
           autoPlayInterval={5000}
           className="-mt-4"
+          testID='carousel'
         />
         {renderIndicators()}
         
-        <TouchableOpacity className="py-3 bg-indigo-500 rounded mt-6 w-40 items-center" onPress={handleFinish}>
+        <TouchableOpacity testID="finishButton" className="py-3 bg-indigo-500 rounded mt-6 w-40 items-center" onPress={handleFinish}>
           <Text className="text-white">Finish</Text>
         </TouchableOpacity>
       </View>
