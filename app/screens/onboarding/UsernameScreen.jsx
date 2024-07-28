@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useNavigation } from "@react-navigation/native";
 import { supabase } from '../../../lib/supabase';
@@ -26,8 +26,12 @@ export default function UsernameScreen() {
     }, []);
 
     const handleNext = async () => {
-        const user_Id = userId;
+        if (username.trim() === '') {
+            Alert.alert('Username Required', 'Please enter a username.');
+            return;
+        }
 
+        const user_Id = userId;
         const { error } = await saveUsername(user_Id, username);
 
         if (error) {
