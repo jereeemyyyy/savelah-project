@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import BackButton from '../../components/BackButton';
@@ -13,6 +13,11 @@ export default function BankDetailsScreen() {
     const handleNext = async () => {
         // Call the function to save the username
         const { error } = await addBankDetails(userId, bankDetails);
+
+        if (bankDetails.trim() === '') {
+            Alert.alert('Bank Details Required', 'Please your Bank number.');
+            return;
+        }
 
         if (error) {
             console.error('Error saving username:', error);
