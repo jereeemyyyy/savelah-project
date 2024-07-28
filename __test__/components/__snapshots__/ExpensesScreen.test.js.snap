@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExpensesScreen renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "justifyContent": "flex-start",
+      },
+      {
+        "backgroundColor": "#1f2937",
+      },
+      {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      {
+        "flexDirection": "column",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "fontWeight": "700",
+        },
+        {
+          "fontSize": 30,
+          "lineHeight": 36,
+        },
+        {
+          "paddingBottom": 16,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 16,
+        },
+        {
+          "color": "#fff",
+        },
+      ]
+    }
+  >
+    Expenses This Week
+  </Text>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "0%",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+        {
+          "marginBottom": -40,
+        },
+      ]
+    }
+  >
+    <ExpensesSummary
+      userId="123"
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "0%",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+        {
+          "marginTop": -80,
+        },
+      ]
+    }
+  >
+    <ExpensesCategoryButton
+      userId="123"
+    />
+  </View>
+</View>
+`;

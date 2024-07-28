@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BudgetsScreen renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      {
+        "backgroundColor": "#1f2937",
+      },
+      {
+        "paddingBottom": 24,
+        "paddingLeft": 24,
+        "paddingRight": 24,
+        "paddingTop": 24,
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "color": "#fff",
+        },
+        {
+          "fontSize": 36,
+          "lineHeight": 40,
+        },
+        {
+          "fontWeight": "700",
+        },
+        {
+          "marginTop": 12,
+        },
+        {
+          "marginBottom": 24,
+        },
+      ]
+    }
+  >
+    Set up a monthly budget goal
+  </Text>
+  <View
+    style={
+      [
+        {
+          "flexDirection": "row",
+        },
+        {
+          "justifyContent": "space-between",
+        },
+        {
+          "marginBottom": 24,
+        },
+        {
+          "alignItems": "center",
+        },
+      ]
+    }
+  >
+    <TotalBudget
+      totalBudget={0}
+    />
+    <AddCategoryButton
+      onPress={[Function]}
+    />
+  </View>
+  <CategoryList
+    categories={[]}
+    handleCategorySelect={[Function]}
+    pressed={null}
+    selectedCategory={null}
+  />
+  <BudgetModal
+    budgetGoal={400}
+    onBudgetChange={[Function]}
+    onClose={[Function]}
+    onDelete={[Function]}
+    onSave={[Function]}
+    totalBudget={0}
+    visible={false}
+  />
+  <AddCategoryModal
+    onAddCategory={[Function]}
+    onClose={[Function]}
+    visible={false}
+  />
+</View>
+`;

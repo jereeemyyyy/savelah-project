@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeaderboardScreen renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+      {
+        "backgroundColor": "#1f2937",
+      },
+    ]
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "fontSize": 30,
+          "lineHeight": 36,
+        },
+        {
+          "fontWeight": "700",
+        },
+        {
+          "paddingBottom": 16,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 16,
+        },
+        {
+          "textAlign": "left",
+        },
+        {
+          "color": "#fff",
+        },
+      ]
+    }
+    testID="leaderboards"
+  >
+    Leaderboards
+  </Text>
+  <LeaderboardList />
+</View>
+`;

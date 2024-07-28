@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeScreen renders correctly 1`] = `
+<RCTSafeAreaView
+  style={
+    [
+      {
+        "backgroundColor": "#1f2937",
+      },
+      {
+        "flexBasis": "0%",
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "paddingBottom": 16,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 16,
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "fontWeight": "700",
+          },
+          {
+            "fontSize": 30,
+            "lineHeight": 36,
+          },
+          {
+            "color": "#fff",
+          },
+        ]
+      }
+    >
+      Expenses This Week
+    </Text>
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "0%",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+        {
+          "marginBottom": -40,
+        },
+      ]
+    }
+  >
+    <ExpensesSummary
+      userId="123"
+    />
+  </View>
+  <View
+    style={
+      [
+        {
+          "flexBasis": "0%",
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+        {
+          "marginTop": -80,
+        },
+      ]
+    }
+  >
+    <ToDoList />
+  </View>
+</RCTSafeAreaView>
+`;
