@@ -66,7 +66,7 @@ export default function ToDoList() {
   
   // Setting up of WebSocket Connection (For Real-Time Updates feature testing)
   //useEffect(() => {   
-    // const socket = io(BANK_API_URL); <== Add the BANK_API_URL here if you want to test
+    // const socket = io(BANK_API_URL); //<== Add the BANK_API_URL here if you want to test
 
     // socket.on('connect', () => {
     //   console.log('Connected to WebSocket server');
